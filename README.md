@@ -1,2 +1,2 @@
 # weCode
-weCode website
+Django blog
