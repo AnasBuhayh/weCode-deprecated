@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %} weCode - Add Post {{ post.title_tag }} {% endblock %}
+{% block content %}
+<h1>Add Post</h1>
+<br>
+
+<div class="form-group">
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <br>
+    <button class="btn btn-secondary">Post</button>
+</form>
+</div>
+{% endblock %}

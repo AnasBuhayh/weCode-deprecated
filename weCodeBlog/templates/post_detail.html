@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block title %} weCode -  {{ post.title_tag }} {% endblock %}
 {% block content %}
+
 <h1>{{ post.title }}</h1>
 <small>
-    By: {{ post.author.first_name }} {{ post.author.last_name }}
+    By: {{ post.author.first_name }} {{ post.author.last_name }} | <a href="{% url 'update-post' post.pk %}">Edit</a> - <a href="{% url 'delete-post' post.pk %}">Delete</a>
 </small>
 <hr>
 {{ post.body }}

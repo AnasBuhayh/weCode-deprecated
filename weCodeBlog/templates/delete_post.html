@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} weCode - Edit Post {{ post.title_tag }} {% endblock %}
+{% block content %}
+
+<h1>Delete Post</h1>
+<br>
+
+<h3>Delete: {{ post.title }}</h3>
+
+<div class="form-group">
+<form method="POST">
+    {% csrf_token %}
+    <br>
+    <strong>Are you sure you want to delete this post?</strong>
+    <br>
+    <br>
+    <button class="btn btn-danger">Delete Post</button>
+</form>
+</div>
+
+{% endblock %}
