@@ -9,7 +9,7 @@
     {{ post.post_date }}
 </small>
 <hr>
-{{ post.body }}
+{{ post.body|safe }}
 
 <br><br>
 <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
