@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} weCode - Add Category {{ post.title_tag }} {% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<h1>Add Category</h1>
+<br>
+
+<div class="form-group">
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <br>
+    <button class="btn btn-secondary">Add</button>
+</form>
+</div>
+
+{% else %}
+
+<p>You're not allowd here! get back to the <a href="{% url 'home' %}">home</a> page</p>
+
+{% endif %}
+
+{% endblock %}
