@@ -9,12 +9,10 @@
         <a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a> 
         - <a href="{% url 'category' post.category|slugify %}">{{ post.category }}</a>
         - {{ post.author.first_name }} {{ post.author.last_name }} 
-        {% if user.is_authenticated %}
-        | <small><a href="{% url 'update-post' post.pk %}">Edit</a> - <a href="{% url 'delete-post' post.pk %}">Delete</a></small>
-        {% endif %}
     <br> 
         {{ post.body|slice:":200" }}
     </li>
 {% endfor %}
 </ul>
+
 {% endblock %}

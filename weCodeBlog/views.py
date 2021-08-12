@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 # def home(request):
 #     return render(request, 'home.html', {})
 
+#refactor to class
 def CategoryView(request, cats):
     category_posts = Post.objects.filter(category=cats.replace('-', ' '))
     return render(request, 'categories.html', {
@@ -14,14 +15,33 @@ def CategoryView(request, cats):
         'category_posts':category_posts
         })
 
+#refactor to class
+def CategoryListView(request):
+    cat_names_list = Category.objects.all()
+    return render(request, 'categories_list.html', {
+        'cat_names_list':cat_names_list
+        })
+
 class HomeView(ListView):
     model = Post
     template_name = 'home.html'
     ordering = ['-post_date']
+    # duplicate code
+    def get_context_data(self, *args, **kwargs):
+        cat_names = Category.objects.all()
+        context = super(HomeView, self).get_context_data(*args, **kwargs)
+        context["cat_names"] = cat_names
+        return context
 
 class PostDetailView(DetailView):
     model = Post
     template_name = 'post_detail.html'
+    # duplicate code
+    def get_context_data(self, *args, **kwargs):
+        cat_names = Category.objects.all()
+        context = super(DetailView, self).get_context_data(*args, **kwargs)
+        context["cat_names"] = cat_names
+        return context
 
 class AddPostView(CreateView):
     model = Post

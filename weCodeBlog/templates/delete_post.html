@@ -2,7 +2,7 @@
 {% block title %} weCode - Edit Post {{ post.title_tag }} {% endblock %}
 {% block content %}
 
-{% if user.is_authenticated %}
+{% if user.id == post.author.id  %}
 
 <h1>Delete Post</h1>
 <br>

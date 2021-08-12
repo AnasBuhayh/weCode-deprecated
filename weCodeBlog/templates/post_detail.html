@@ -4,8 +4,11 @@
 
 <h1>{{ post.title }}</h1>
 <small>
-    By: {{ post.author.first_name }} {{ post.author.last_name }} | <a href="{% url 'update-post' post.pk %}">Edit</a> - <a href="{% url 'delete-post' post.pk %}">Delete</a>
+    By: {{ post.author.first_name }} {{ post.author.last_name }} | 
+    {% if user.id == post.author.id  %}
+    <a href="{% url 'update-post' post.pk %}">Edit</a> - <a href="{% url 'delete-post' post.pk %}">Delete</a>
     <br>
+    {% endif %}
     {{ post.post_date }}
 </small>
 <hr>

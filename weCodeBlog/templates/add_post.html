@@ -10,11 +10,17 @@
 <div class="form-group">
 <form method="POST">
     {% csrf_token %}
+    {{ form.media}}
     {{ form.as_p}}
     <br>
     <button class="btn btn-secondary">Post</button>
 </form>
 </div>
+
+<script>
+    var name = "{{user.id}}";
+    document.getElementById("author").value = name;
+</script>
 
 {% else %}
 

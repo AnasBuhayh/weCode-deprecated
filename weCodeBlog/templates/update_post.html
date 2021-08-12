@@ -2,7 +2,7 @@
 {% block title %} weCode - Edit Post {{ post.title_tag }} {% endblock %}
 {% block content %}
 
-{% if user.is_authenticated %}
+{% if user.id == post.author.id  %}
 
 <h1>Edit Post</h1>
 <br>
@@ -10,6 +10,7 @@
 <div class="form-group">
 <form method="POST">
     {% csrf_token %}
+    {{ form.media}}
     {{ form.as_p}}
     <br>
     <button class="btn btn-secondary">Post</button>
