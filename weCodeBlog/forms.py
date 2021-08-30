@@ -9,12 +9,12 @@ for item in choices:
 class AddPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('author', 'title', 'title_tag', 'category', 'body')
+        fields = ('author', 'title', 'tags', 'category', 'body', 'header_image')
 
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-control'}),
             'author': forms.TextInput(attrs={'class':'form-control', 'value':'','id':'author','type':'hidden'}),
-            'title_tag': forms.TextInput(attrs={'class':'form-control'}),
+            'tags': forms.TextInput(attrs={'class':'form-control'}),
             'category': forms.Select(choices=choices_list, attrs={'class':'form-control'}),
             'body': forms.Textarea(attrs={'class':'form-control'})
         }
@@ -22,10 +22,10 @@ class AddPostForm(forms.ModelForm):
 class UpdatePostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'title_tag', 'body')
+        fields = ('title', 'tags', 'body')
 
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-control'}),
-            'title_tag': forms.TextInput(attrs={'class':'form-control'}),
+            'tags': forms.TextInput(attrs={'class':'form-control'}),
             'body': forms.Textarea(attrs={'class':'form-control'})
         }

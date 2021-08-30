@@ -2,9 +2,10 @@
 {% block title %} Edit Profile {% endblock %}
 {% block content %}
 
-<h1>Login</h1>
+<h1>Edit Profile</h1>
 <br>
-
+{{ user.profile.bio }}
+<br>
 <div class="form-group">
 <form method="POST">
     {% csrf_token %}
