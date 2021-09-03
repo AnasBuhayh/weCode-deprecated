@@ -4,12 +4,21 @@
 <h1>Login</h1>
 <br>
 
+
 <div class="form-group">
+<h1>Login</h1>
 <form method="POST">
     {% csrf_token %}
-    {{ form.as_p}}
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Username" name="username">
+    </div>
+    <br>
+    <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password" name="password">
+    </div>
     <br>
     <button class="btn btn-secondary">Login</button>
+    Not registered? Sign Up <a href="{% url 'register' %}">Here</a>
 </form>
 </div>
 

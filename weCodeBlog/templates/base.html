@@ -27,7 +27,7 @@
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto">
                   {% if user.is_authenticated %}
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'add-post' %}">Add Post</a>
@@ -35,18 +35,9 @@
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'add-category' %}">Add Category</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'edit-profile' %}">Edit Profile</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                  </li>
                   {% else %}
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'register' %}">Register</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Login</a>
                   </li>
                   {% endif %}
                   <!-- category menu -->
@@ -64,7 +55,33 @@
                     <!-- end category menu -->
                   </li>
                 </ul>
-              </div>
+                <ul class="navbar-nav navbar-left">
+                  {% if user.is_authenticated %}
+                  <!-- Settings menu -->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{ user.username }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      {% if user.profile.id %}
+                      <a class="dropdown-item" href="{% url 'show-profile-page' user.profile.id %}">Show Profile</a>
+                      <a class="dropdown-item" href="{% url 'edit-profile-page' user.profile.id %}">Edit Profile</a>
+                      <a class="dropdown-item" href="{% url 'edit-profile' %}">Edit Settings</a>
+                      {% else %}
+                      <a class="dropdown-item" href="{% url 'create-profile-page' %}">Create Profile</a>
+                      {% endif %}
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                    </div>
+                  </li>
+                  <!-- end Settings menu -->
+                  {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </div>  
             </div>
           </nav>
     </div>
