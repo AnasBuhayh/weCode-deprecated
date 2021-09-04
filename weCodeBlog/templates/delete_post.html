@@ -4,25 +4,25 @@
 
 {% if user.id == post.author.id  %}
 
-<h1>Delete Post</h1>
+<h1>حذف مقالة</h1>
 <br>
 
-<h3>Delete: {{ post.title }}</h3>
+<h3>حذف: {{ post.title }}</h3>
 
 <div class="form-group">
 <form method="POST">
     {% csrf_token %}
     <br>
-    <strong>Are you sure you want to delete this post?</strong>
+    <strong>هل أنت متأكد من الرغبة في إزالة المقالة؟</strong>
     <br>
     <br>
-    <button class="btn btn-danger">Delete Post</button>
+    <button class="btn btn-danger">حذف المقالة</button>
 </form>
 </div>
 
 {% else %}
 
-<p>You're not allowd here! get back to the <a href="{% url 'home' %}">home</a> page</p>
+<p>صحفة خاطئة يرجى العودة <a href="{% url 'home' %}">للرئيسية</a></p>
 
 {% endif %}
 

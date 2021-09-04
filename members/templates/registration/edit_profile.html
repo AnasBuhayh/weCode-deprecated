@@ -2,7 +2,7 @@
 {% block title %} Edit Profile {% endblock %}
 {% block content %}
 
-<h1>Edit Profile</h1>
+<h1>تعديل البيانات</h1>
 <br>
 {{ user.profile.bio }}
 <br>
@@ -11,7 +11,7 @@
     {% csrf_token %}
     {{ form.as_p}}
     <br>
-    <button class="btn btn-secondary">Update</button>
+    <button class="btn btn-secondary">حفظ</button>
 </form>
 </div>
 

@@ -13,7 +13,6 @@ class CreateProfilePageView(CreateView):
     form_class = ProfilePageForm
     template_name = 'registration/create_profile_page.html'
 
-    
     # gets the user id
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -33,7 +32,8 @@ class ShowProfilePageView(DetailView):
 class EditProfilePageView(generic.UpdateView):
     model = Profile
     template_name = 'registration/edit_profile_page.html'
-    fields = ['bio', 'profile_pic', 'website_url', 'twitter_url', 'facebook_url', 'github_url']
+    form_class = ProfilePageForm
+    #fields = ['bio', 'profile_pic', 'website_url', 'twitter_url', 'facebook_url', 'github_url']
     success_url = reverse_lazy('home')
 
 class PasswordsChangeView(PasswordChangeView):

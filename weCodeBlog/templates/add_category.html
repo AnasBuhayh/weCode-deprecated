@@ -4,7 +4,7 @@
 
 {% if user.is_authenticated %}
 
-<h1>Add Category</h1>
+<h1>إضافة تصنيف</h1>
 <br>
 
 <div class="form-group">
@@ -12,13 +12,13 @@
     {% csrf_token %}
     {{ form.as_p}}
     <br>
-    <button class="btn btn-secondary">Add</button>
+    <button class="btn btn-secondary">إضافة</button>
 </form>
 </div>
 
 {% else %}
 
-<p>You're not allowd here! get back to the <a href="{% url 'home' %}">home</a> page</p>
+<p>صحفة خاطئة يرجى العودة <a href="{% url 'home' %}">للرئيسية</a></p>
 
 {% endif %}
 

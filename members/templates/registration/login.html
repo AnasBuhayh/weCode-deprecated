@@ -1,24 +1,22 @@
 {% extends 'base.html' %}
 {% block title %} Login {% endblock %}
 {% block content %}
-<h1>Login</h1>
-<br>
-
 
 <div class="form-group">
-<h1>Login</h1>
+<h1>تسجيل الدخول</h1>
+
 <form method="POST">
     {% csrf_token %}
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="Username" name="username">
+        <input type="text" class="form-control" placeholder="اسم المستخدم" name="username">
     </div>
     <br>
     <div class="form-group">
-        <input type="password" class="form-control" placeholder="Password" name="password">
+        <input type="password" class="form-control" placeholder="كلمة السر" name="password">
     </div>
     <br>
-    <button class="btn btn-secondary">Login</button>
-    Not registered? Sign Up <a href="{% url 'register' %}">Here</a>
+    <button class="btn btn-secondary">دخول</button>
+    لست مسجل؟ يمكنك التسجيل من <a href="{% url 'register' %}">هنا</a>
 </form>
 </div>
 

@@ -18,7 +18,6 @@ class Post(models.Model):
     header_image = models.ImageField(null=True, blank=True, upload_to="images/")
     tags = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    #body = models.TextField()
     body = RichTextField(blank=True, null=True)
     post_date = models.DateField(auto_now_add=True)
     update_date = models.DateField(auto_now_add=True)

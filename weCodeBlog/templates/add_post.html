@@ -4,7 +4,7 @@
 
 {% if user.is_authenticated %}
 
-<h1>Add Post</h1>
+<h1>إضافة مقالة</h1>
 <br>
 
 <div class="form-group">
@@ -13,7 +13,7 @@
     {{ form.media}}
     {{ form.as_p}}
     <br>
-    <button class="btn btn-secondary">Post</button>
+    <button class="btn btn-secondary">إضافة</button>
 </form>
 </div>
 
@@ -24,7 +24,7 @@
 
 {% else %}
 
-<p>You're not allowd here! get back to the <a href="{% url 'home' %}">home</a> page</p>
+<p>صحفة خاطئة يرجى العودة <a href="{% url 'home' %}">للرئيسية</a></p>
 
 {% endif %}
 

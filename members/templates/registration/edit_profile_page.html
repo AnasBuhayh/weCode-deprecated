@@ -5,7 +5,7 @@
 {% if user.is_authenticated %}
 {% if user.id == profile.user.id %}
 
-<h1>Edit Profile</h1>
+<h1>تعديل البيانات</h1>
 <br>
 
 <div class="form-group">
@@ -13,7 +13,7 @@
     {% csrf_token %}
     {{ form.as_p}}
     <br>
-    <button class="btn btn-secondary">Update Profile</button>
+    <button class="btn btn-secondary">حفظ</button>
 </form>
 </div>
 
@@ -24,7 +24,7 @@
 
 {% else %}
 
-<p>You're not allowd here! get back to the <a href="{% url 'home' %}">home</a> page</p>
+<p>صحفة خاطئة يرجى العودة <a href="{% url 'home' %}">للرئيسية</a></p>
 
 {% endif %}
 {% endif %}

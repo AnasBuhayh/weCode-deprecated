@@ -10,7 +10,7 @@
         <a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a> 
         - {{ post.author.first_name }} {{ post.author.last_name }} 
         {% if user.is_authenticated %}
-        | <small><a href="{% url 'update-post' post.pk %}">Edit</a> - <a href="{% url 'delete-post' post.pk %}">Delete</a></small>
+        | <small><a href="{% url 'update-post' post.pk %}">تعديل</a> - <a href="{% url 'delete-post' post.pk %}">إزالة</a></small>
         {% endif %}
     <br> 
         {{ post.body|slice:":200" }}
@@ -20,7 +20,7 @@
 
 {% else %}
 
-<h2>Sorry, this page does not exist ... </h2>
+<h2>عذرا. هذه الصفحة غير موجودة </h2>
 
 {% endif %}
 
