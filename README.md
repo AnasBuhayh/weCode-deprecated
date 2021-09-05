@@ -17,7 +17,7 @@ Clone the project to your preferred directory
 
 `https://github.com/AnasBuhayh/weCode.git`
 
-*Recomended:* Create a vistual environment
+*Recomended:* Create a virtual environment
 
 `python -m venv myEnv`
 
