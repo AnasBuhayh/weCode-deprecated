@@ -39,5 +39,5 @@ Database: PostgreSQL
 
 ### django user credentials
 
-username : admin
-password : Admin_2020
+- username : admin
+- password : Admin_2020
