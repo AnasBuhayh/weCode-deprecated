@@ -20,7 +20,7 @@ The source code of WeCode.ly blog
 
 - Add your newly created database name and credentials in the settings.py file
 
-- *Recomended:* Create a vistual environment
+- *Recomended:* Create a virtual environment
 
 `python -m venv myEnv`
 
