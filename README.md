@@ -7,7 +7,7 @@ Database: PostgreSQL
 
 # Installation
 
-## Database setup
+### Database setup
 
 - Create new Postgres database
 - Restore the template database  `/database/default_db.sql`
