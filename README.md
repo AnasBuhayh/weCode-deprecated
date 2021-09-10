@@ -12,12 +12,13 @@ Database: PostgreSQL
 - Create new Postgres database
 - Restore the template database  `/database/default_db.sql`
 
-
 ### App Setup
 
 - Clone the project to your preferred directory
 
 `https://github.com/AnasBuhayh/weCode.git`
+
+- Add your newly created database name and credentials in the settings.py file
 
 - *Recomended:* Create a vistual environment
 
@@ -30,8 +31,6 @@ Database: PostgreSQL
 - Install requirements
 
 `pip install -r .\requirements.txt`
-
-- Add your newly created database name and credentials in the settings.py file
 
 - Run application
 
