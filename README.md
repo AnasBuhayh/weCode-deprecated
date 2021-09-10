@@ -7,7 +7,7 @@ Database: PostgreSQL
 
 # Installation
 
-## Database setup
+### Database setup
 
 - Create new Postgres database
 - Restore the template database  `/database/default_db.sql`
@@ -39,5 +39,5 @@ Database: PostgreSQL
 
 ### django user credentials
 
-username : admin
-password : Admin_2020
+- username : admin
+- password : Admin_2020
