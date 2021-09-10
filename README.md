@@ -2,8 +2,8 @@
 The source code of WeCode.ly blog
 
 # Specifications
-Framework: Django
-Database: PostgreSQL
+- Framework: Django
+- Database: PostgreSQL
 
 # Installation
 
