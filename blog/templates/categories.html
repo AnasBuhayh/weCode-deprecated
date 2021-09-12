@@ -2,21 +2,22 @@
 {% block content %}
 
 {% if category_posts %}
+<br>
 <h1>{{ cats }}</h1>
+<br>
 
-<ul>
 {% for post in category_posts %}
-    <li>
-        <a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a> 
-        - {{ post.author.first_name }} {{ post.author.last_name }} 
-        {% if user.is_authenticated %}
-        | <small><a href="{% url 'update-post' post.pk %}">تعديل</a> - <a href="{% url 'delete-post' post.pk %}">إزالة</a></small>
-        {% endif %}
-    <br> 
-        {{ post.body|slice:":200" }}
-    </li>
+<small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.post_date }}</small>
+<br>
+<h2><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a> </h2>
+<br>
+<img src="{{ post.header_image.url }}" class="img-fluid" alt="">
+<br>
+<p>{{ post.body|slice:":200"|safe }}</p>
+<small><a href="{% url 'category' post.category|slugify %}">{{ post.category }}</a></small>
+<hr>
 {% endfor %}
-</ul>
+
 
 {% else %}
 

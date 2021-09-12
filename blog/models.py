@@ -15,6 +15,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
+    summary = models.CharField(max_length=500)
     header_image = models.ImageField(null=True, blank=True, upload_to="images/")
     tags = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE)

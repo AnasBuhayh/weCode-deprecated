@@ -5,7 +5,7 @@
 
 <h1>{{ post.title }}</h1>
 <small>
-    By: {{ post.author.first_name }} {{ post.author.last_name }} | 
+    {{ post.author.first_name }} {{ post.author.last_name }} | 
     {% if user.id == post.author.id  %}
     <a href="{% url 'update-post' post.pk %}">تعديل</a> - <a href="{% url 'delete-post' post.pk %}">حذف</a>
     <br>

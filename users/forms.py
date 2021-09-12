@@ -18,10 +18,25 @@ class ProfilePageForm(forms.ModelForm):
             'github_url': forms.TextInput(attrs={'class':'form-control'}),
         }
 
+        labels = {
+        "bio": "السيرة الذاتية",
+        "profile_pic": "الصورة الشخصية",
+        "website_url": "الموقع الشخصي",
+        "twitter_url": "Twitter",
+        "facebook_url": "Facebook",
+        "github_url": "GitHub",
+        }
+
 class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username','first_name','last_name','email','password1','password2')
+    
+        labels = {
+            "first_name": "الإسم",
+            "last_name": "اللقب",
+            "email": "البريد الإلكتروني",
+            }
 
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
     first_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
@@ -34,14 +49,16 @@ class SignUpForm(UserCreationForm):
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['class'] = 'form-control'
 
+        self.fields['username'].label = "إسم المستخدم"
+        self.fields['password1'].label = "كلمة المرور"
+        self.fields['password2'].label = "تأكيد كلمة المرور"
 
 class EditProfileForm(UserChangeForm):
     class Meta:
         model = User
-        fields = ('username','first_name','last_name','email','password')
+        fields = ('first_name','last_name','email','password')
 
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
-    username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control', 'title':'new title'}))
     first_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
     last_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
 
@@ -50,7 +67,7 @@ class PasswordChangeingForm(PasswordChangeForm):
     class Meta:
         model = User
         fields = ('old_password','new_password1','new_password2')
-    
+
     old_password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control', 'type':'password'}))
     new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control', 'type':'password'}))
     new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control', 'type':'password'}))
