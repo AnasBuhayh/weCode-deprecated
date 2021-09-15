@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Category
-from .forms import AddPostForm, UpdatePostForm
+from .forms import AddPostForm, UpdatePostForm, AddCommentForm
 from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 
 
 def CategoryView(request, cats):
@@ -30,15 +31,26 @@ class HomeView(ListView):
         context["cat_names"] = cat_names
         return context
 
+
 class PostDetailView(DetailView):
     model = Post
     template_name = 'post_detail.html'
-    
+    form = AddCommentForm
+
     def get_context_data(self, *args, **kwargs):
-        cat_names = Category.objects.all()
-        context = super(DetailView, self).get_context_data(*args, **kwargs)
-        context["cat_names"] = cat_names
+        # context = super(DetailView, self).get_context_data(*args, **kwargs)
+        context = super().get_context_data(*args, **kwargs)
+        context["form"] = self.form
         return context
+
+    def post(self, request, *args, **kwargs):
+        form = AddCommentForm(request.POST)
+        if form.is_valid():
+            post = self.get_object()
+            form.instance.user = request.user
+            form.instance.post = post
+            form.save()
+            return redirect(request.META['HTTP_REFERER'])
 
 class AddPostView(CreateView):
     model = Post
@@ -50,6 +62,7 @@ class AddPostView(CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+
 class AddCategoryView(CreateView):
     model = Category
     fields = '__all__'
@@ -60,6 +73,7 @@ class UpdatePostView(UpdateView):
     model = Post
     form_class = UpdatePostForm
     template_name = 'update_post.html'
+
 
 class DeletePostView(DeleteView):
     model = Post

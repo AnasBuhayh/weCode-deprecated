@@ -3,7 +3,7 @@
 {% block content %}
 
 {% for post in object_list %}
-<small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.post_date|date:"d/m/Y" }}</small>
+<small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.date_published|date:"d/m/Y" }}</small>
 <br>
 <h2><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a> </h2>
 <p> {{ post.summary }} </p>

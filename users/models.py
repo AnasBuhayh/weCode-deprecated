@@ -11,6 +11,7 @@ class Profile(models.Model):
     twitter_url = models.CharField(max_length=255, null=True, blank=True)
     facebook_url = models.CharField(max_length=255, null=True, blank=True)
     github_url = models.CharField(max_length=255, null=True, blank=True)
+    created_date = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return str(self.user)

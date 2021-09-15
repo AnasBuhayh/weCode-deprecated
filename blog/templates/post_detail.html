@@ -14,10 +14,21 @@
 </small>
 <hr>
 
+<br>
+<br>
+{{ post.sumamry}}
+<br>
+<br>
+
 {% if post.header_image %}
     <br>
     <img src="{{ post.header_image.url }}" alt="">
 {% endif %}
+
+<br>
+<br>
+{{ post.body|safe }}
+<br>
 <br>
 
 {% if post.author.profile %}
@@ -54,10 +65,39 @@
 </div>
 {% endif %}
 
-<br>
-{{ post.body|safe }}
-<br>
+<hr>
 
 <br>
+<h2>التعليقات</h2>
+
+{% if post.comments %}  
+    {% for comment in post.comments.all %} 
+    <strong>
+        {{ comment.name }} -
+        {{ comment.post_date }} - <br>
+    </strong>
+        {{ comment.body }}
+    {% endfor %}
+{% endif %}
+
+<br>
+<br>
+
+{% if user.is_authenticated %}
+    <h3>إضافة تعليق</h3>
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <br>
+            <button class="btn btn-secondary">إضافة تعليق</button>
+        </form>
+    </div>
+{% endif %}
+
+
+<br>
+<br>
+
 <a href="{% url 'home' %}" class="btn btn-secondary">رجوع</a>
 {% endblock %}
