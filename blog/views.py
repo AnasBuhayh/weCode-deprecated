@@ -4,21 +4,10 @@ from .models import Post, Category
 from .forms import AddPostForm, UpdatePostForm, AddCommentForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
+from rest_framework.decorators import api_view
+from rest_framework.pagination import PageNumberPagination
+from .serializers import PostSerializer
 
-
-def CategoryView(request, cats):
-    category_posts = Post.objects.filter(category=cats.replace('-', ' '))
-    return render(request, 'categories.html', {
-        'cats':cats.title().replace('-', ' '), 
-        'category_posts':category_posts
-        })
-
-
-def CategoryListView(request):
-    cat_names_list = Category.objects.all()
-    return render(request, 'categories_list.html', {
-        'cat_names_list':cat_names_list
-        })
 
 class HomeView(ListView):
     model = Post
@@ -30,6 +19,18 @@ class HomeView(ListView):
         context = super(HomeView, self).get_context_data(*args, **kwargs)
         context["cat_names"] = cat_names
         return context
+
+# gets posts for vue paginator <not currently used>
+@api_view(['GET'])
+def GetPosts(request):
+    posts = Post.objects.all()
+    paginator = PageNumberPagination()
+    paginator.page_size = 3
+    results = paginator.paginate_queryset(posts, request)
+
+    serializer = PostSerializer(results, many=True)
+
+    return paginator.get_paginated_response(serializer.data)
 
 
 class PostDetailView(DetailView):
@@ -52,6 +53,7 @@ class PostDetailView(DetailView):
             form.save()
             return redirect(request.META['HTTP_REFERER'])
 
+
 class AddPostView(CreateView):
     model = Post
     form_class = AddPostForm
@@ -61,12 +63,6 @@ class AddPostView(CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-
-
-class AddCategoryView(CreateView):
-    model = Category
-    fields = '__all__'
-    template_name = 'add_category.html'
 
 
 class UpdatePostView(UpdateView):
@@ -79,3 +75,26 @@ class DeletePostView(DeleteView):
     model = Post
     template_name = 'delete_post.html'
     success_url = reverse_lazy('home')
+
+
+class AddCategoryView(CreateView):
+    model = Category
+    fields = '__all__'
+    template_name = 'add_category.html'
+
+
+def CategoryView(request, cats):
+    category_posts = Post.objects.filter(category=cats.replace('-', ' '))
+    return render(request, 'categories.html', {
+        'cats':cats.title().replace('-', ' '), 
+        'category_posts':category_posts
+        })
+
+
+def CategoryListView(request):
+    cat_names_list = Category.objects.all()
+    return render(request, 'categories_list.html', {
+        'cat_names_list':cat_names_list
+        })
+
+

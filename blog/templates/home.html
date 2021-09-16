@@ -2,16 +2,17 @@
 
 {% block content %}
 
-{% for post in object_list %}
-<small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.date_published|date:"d/m/Y" }}</small>
-<br>
-<h2><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a> </h2>
-<p> {{ post.summary }} </p>
-<img src="{{ post.header_image.url }}" class="img-fluid mx-auto d-block" alt="">
-<p>{{ post.body|slice:":200"|safe }}</p>
-<small><a href="{% url 'category' post.category|slugify %}">{{ post.category }}</a></small>
-<hr>
-{% endfor %}
-
+<div id="posts">
+    {% for post in object_list %}
+    <small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.date_published|date:"d/m/Y" }}</small>
+    <br>
+    <h2><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a> </h2>
+    <p> {{ post.summary }} </p>
+    <img src="{{ post.header_image.url }}" class="img-fluid mx-auto d-block" alt="">
+    <p>{{ post.body|slice:":200"|safe }}</p>
+    <small><a href="{% url 'category' post.category|slugify %}">{{ post.category }}</a></small>
+    <hr>
+    {% endfor %}
+</div>
 
 {% endblock %}
