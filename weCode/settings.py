@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'blog',
     'users',
-    'ckeditor'
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -145,3 +145,59 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+
+# Text editor settings
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+AWS_QUERYSTRING_AUTH = False
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'moono',
+        # 'skin': 'office2013',
+        'toolbar_Basic': [
+            ['Source', '-', 'Bold', 'Italic']
+        ],
+        'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
+        'toolbarGroups': [
+            # { 'name': 'document',	   'groups': [ 'mode', 'document', 'doctools' ] },
+            # { 'name': 'clipboard',   'groups': [ 'clipboard', 'undo' ] },
+            # { 'name': 'editing',     'groups': [ 'find', 'selection', 'spellchecker' ] },
+            # { 'name': 'forms' },
+             { 'name': 'basicstyles', 'groups': [ 'basicstyles', 'cleanup' ] },
+             { 'name': 'paragraph',   'groups': [ 'list', 'indent','align' ] },
+             { 'name': 'links' },
+             { 'name': 'insert' },
+             { 'name': 'styles'},
+            # { 'name': 'colors' },
+            # { 'name': 'tools' },
+            # { 'name': 'others' },
+            # { 'name': 'about' }
+        ],
+        # 'removeButtons' : ['Underline,JustifyCenter'],
+        # 'height': 291,
+        # 'width': '100%',
+        # 'filebrowserWindowHeight': 725,
+        # 'filebrowserWindowWidth': 940,
+        # 'toolbarCanCollapse': True,
+        # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
+        'tabSpaces': 4,
+        'extraPlugins': ','.join([
+            'uploadimage', # the upload image feature
+            # your extra plugins here
+            'div',
+            'autolink',
+            'autoembed',
+            'embedsemantic',
+            'autogrow',
+            # 'devtools',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath'
+        ]),
+    }
+    
+}

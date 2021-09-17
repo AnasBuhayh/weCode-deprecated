@@ -4,6 +4,7 @@ from django.urls import reverse
 from datetime import datetime, date
 from ckeditor.fields import RichTextField
 from django.db.models.signals import pre_save
+
 # from django.utils.text import slugify
 
 class Category(models.Model):
