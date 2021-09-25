@@ -4,6 +4,10 @@ from django.urls import reverse
 from datetime import datetime, date
 from ckeditor.fields import RichTextField
 from django.db.models.signals import pre_save
+from hitcount.models import HitCountMixin, HitCount
+from django.contrib.contenttypes.fields import GenericRelation
+
+
 
 # from django.utils.text import slugify
 
@@ -20,7 +24,7 @@ class Category(models.Model):
     def get_absolute_url(self):
         return f'/{self.slug}/'
 
-class Post(models.Model):
+class Post(models.Model, HitCountMixin):
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, allow_unicode=True)
     summary = models.CharField(max_length=500)
@@ -31,9 +35,8 @@ class Post(models.Model):
     post_date = models.DateField(auto_now_add=True)
     update_date = models.DateField(auto_now=True)
     category = models.ForeignKey(Category, related_name='posts', on_delete=models.CASCADE)
-    visits = models.IntegerField(default=0)
-    up_votes = models.IntegerField(default=0)
     featured = models.BooleanField(default=False)
+    views = GenericRelation(HitCount, object_id_field='object_pk',related_query_name='hit_count_generic_relation')
 
     class Meta:
         ordering = ('-post_date',)

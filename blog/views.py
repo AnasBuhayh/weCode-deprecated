@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from rest_framework.decorators import api_view
 from rest_framework.pagination import PageNumberPagination
 from .serializers import PostSerializer
+from hitcount.views import HitCountDetailView
 
 
 class HomeView(ListView):
@@ -17,14 +18,15 @@ class HomeView(ListView):
     def get_context_data(self, **kwargs):
         posts = Post.objects.order_by('-post_date')
         featured = posts.filter(featured=True)[:1]
-        latest = posts[:1]
+        popular = posts.order_by('-views')[:3]
         
         context = super().get_context_data(**kwargs)
         context = {
             'posts' : posts,
             'featured': featured,
-            'latest': latest,
+            'popular': popular,
         }
+
         return context
 
     # Get category names
@@ -41,22 +43,23 @@ class CategoryView(ListView):
     def get_context_data(self, **kwargs):
         posts = Post.objects.filter(category__slug=self.kwargs["category_slug"]).order_by('-post_date')
         featured = posts.filter(featured=True)[:1]
-        latest = posts[:1]
+        popular = posts.order_by('-hit_count_generic__hits')[:3]
 
         context = super().get_context_data(**kwargs)
         context = {
             'posts' : posts,
             'featured': featured,
-            'latest': latest,
+            'popular': popular,
         }
 
         return context
 
 
-class PostDetailView(DetailView):
+class PostDetailView(HitCountDetailView):
     model = Post
     template_name = 'post_detail.html'
     form = AddCommentForm
+    count_hit = True
 
     def get_context_data(self, *args, **kwargs):
         # context = super(DetailView, self).get_context_data(*args, **kwargs)

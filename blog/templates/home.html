@@ -23,7 +23,7 @@
 <h2 style="color: red;">الأكثر قراءة</h2>
 <br>
 
-    {% for post in latest %}
+    {% for post in popular %}
     <small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.date_published|date:"d/m/Y" }}</small>
     <br>
     <h2><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a> </h2>
