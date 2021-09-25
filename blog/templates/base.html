@@ -38,28 +38,13 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'add-post' %}">إضافة مقالة</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'add-category' %}">إضافة تصنيف</a>
-        </li>
         {% else %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'register' %}">تسجيل</a>
         </li>
         {% endif %}
         <!-- category menu -->
-        {% if cat_names %}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            تصنيفات
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            {% for item in cat_names %}
-            <a class="dropdown-item" href="{% url 'category' item|slugify %}">{{ item }}</a>
-            {% endfor %}
-          </div>
-          {% endif %}
-          <!-- end category menu -->
+        <!-- end category menu -->
         </li>
         {% if user.is_authenticated %}
         <!-- Settings menu -->

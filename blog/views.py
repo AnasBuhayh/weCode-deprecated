@@ -12,25 +12,45 @@ from .serializers import PostSerializer
 class HomeView(ListView):
     model = Post
     template_name = 'home.html'
-    ordering = ['-post_date']
+    # paginate_by = 1
     
-    def get_context_data(self, *args, **kwargs):
-        cat_names = Category.objects.all()
-        context = super(HomeView, self).get_context_data(*args, **kwargs)
-        context["cat_names"] = cat_names
+    def get_context_data(self, **kwargs):
+        posts = Post.objects.order_by('-post_date')
+        featured = posts.filter(featured=True)[:1]
+        latest = posts[:1]
+        
+        context = super().get_context_data(**kwargs)
+        context = {
+            'posts' : posts,
+            'featured': featured,
+            'latest': latest,
+        }
         return context
 
-# gets posts for vue paginator <not currently used>
-@api_view(['GET'])
-def GetPosts(request):
-    posts = Post.objects.all()
-    paginator = PageNumberPagination()
-    paginator.page_size = 3
-    results = paginator.paginate_queryset(posts, request)
+    # Get category names
+    # def get_context_data(self, *args, **kwargs):
+    #     cat_names = Category.objects.all()
+    #     context = super(HomeView, self).get_context_data(*args, **kwargs)
+    #     context["cat_names"] = cat_names
+    #     return context
 
-    serializer = PostSerializer(results, many=True)
+class CategoryView(ListView):
+    model = Post
+    template_name = 'categories.html'
 
-    return paginator.get_paginated_response(serializer.data)
+    def get_context_data(self, **kwargs):
+        posts = Post.objects.filter(category__slug=self.kwargs["category_slug"]).order_by('-post_date')
+        featured = posts.filter(featured=True)[:1]
+        latest = posts[:1]
+
+        context = super().get_context_data(**kwargs)
+        context = {
+            'posts' : posts,
+            'featured': featured,
+            'latest': latest,
+        }
+
+        return context
 
 
 class PostDetailView(DetailView):
@@ -77,24 +97,14 @@ class DeletePostView(DeleteView):
     success_url = reverse_lazy('home')
 
 
-class AddCategoryView(CreateView):
-    model = Category
-    fields = '__all__'
-    template_name = 'add_category.html'
+# gets posts for vue paginator <not currently used>
+@api_view(['GET'])
+def GetPosts(request):
+    posts = Post.objects.all()
+    paginator = PageNumberPagination()
+    paginator.page_size = 3
+    results = paginator.paginate_queryset(posts, request)
 
+    serializer = PostSerializer(results, many=True)
 
-def CategoryView(request, cats):
-    category_posts = Post.objects.filter(category=cats.replace('-', ' '))
-    return render(request, 'categories.html', {
-        'cats':cats.title().replace('-', ' '), 
-        'category_posts':category_posts
-        })
-
-
-def CategoryListView(request):
-    cat_names_list = Category.objects.all()
-    return render(request, 'categories_list.html', {
-        'cat_names_list':cat_names_list
-        })
-
-
+    return paginator.get_paginated_response(serializer.data)

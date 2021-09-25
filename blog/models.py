@@ -9,12 +9,16 @@ from django.db.models.signals import pre_save
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, allow_unicode=True)
+
+    class Meta:
+        ordering = ('name',)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('home')
+        return f'/{self.slug}/'
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
@@ -26,9 +30,13 @@ class Post(models.Model):
     body = RichTextField(blank=True, null=True)
     post_date = models.DateField(auto_now_add=True)
     update_date = models.DateField(auto_now=True)
-    category = models.CharField(max_length=255)
+    category = models.ForeignKey(Category, related_name='posts', on_delete=models.CASCADE)
     visits = models.IntegerField(default=0)
     up_votes = models.IntegerField(default=0)
+    featured = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('-post_date',)
 
     def __str__(self):
         return self.title + ' | ' + str(self.author)

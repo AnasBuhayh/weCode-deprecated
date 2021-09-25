@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% if category_posts %}
+{% if posts %}
 <br>
-<h1>{{ cats }}</h1>
+<h1>{{ category.name }}</h1>
 <br>
 
-{% for post in category_posts %}
+{% for post in posts %}
 <small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.post_date }}</small>
 <br>
 <h2><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a> </h2>
@@ -14,7 +14,7 @@
 <img src="{{ post.header_image.url }}" class="img-fluid" alt="">
 <br>
 <p>{{ post.body|slice:":200"|safe }}</p>
-<small><a href="{% url 'category' post.category|slugify %}">{{ post.category }}</a></small>
+<small><a href="#">{{ post.category }}</a></small>
 <hr>
 {% endfor %}
 
