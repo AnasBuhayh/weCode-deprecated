@@ -6,6 +6,7 @@ from ckeditor.fields import RichTextField
 from django.db.models.signals import pre_save
 from hitcount.models import HitCountMixin, HitCount
 from django.contrib.contenttypes.fields import GenericRelation
+from taggit.managers import TaggableManager
 
 
 
@@ -29,7 +30,7 @@ class Post(models.Model, HitCountMixin):
     slug = models.SlugField(unique=True, allow_unicode=True)
     summary = models.CharField(max_length=500)
     header_image = models.ImageField(null=True, blank=True, upload_to="images/")
-    tags = models.CharField(max_length=255)
+    tags = TaggableManager()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = RichTextField(blank=True, null=True)
     post_date = models.DateField(auto_now_add=True)

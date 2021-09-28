@@ -8,9 +8,9 @@
 <br>
 
 <div class="form-group">
+{{ form.media}}
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.media}}
     {{ form.as_p}}
     <br>
     <button class="btn btn-secondary">إضافة</button>

@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from rest_framework.pagination import PageNumberPagination
 from .serializers import PostSerializer
 from hitcount.views import HitCountDetailView
+from taggit.models import Tag
 
 
 class HomeView(ListView):
@@ -62,7 +63,6 @@ class PostDetailView(HitCountDetailView):
     count_hit = True
 
     def get_context_data(self, *args, **kwargs):
-        # context = super(DetailView, self).get_context_data(*args, **kwargs)
         context = super().get_context_data(*args, **kwargs)
         context["form"] = self.form
         return context

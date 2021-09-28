@@ -1,5 +1,6 @@
 from django import forms
 from .models import Post, Category, Comment
+import re
 
 choices = Category.objects.all().values_list('name','name')
 choices_list = []
@@ -22,7 +23,7 @@ class AddPostForm(forms.ModelForm):
 
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-control'}),
-            'tags': forms.TextInput(attrs={'class':'form-control'}),
+            'tags': forms.TextInput(attrs={'class':'form-control', 'data-role':"tagsinput", 'name':"tags"}),
             'category': forms.Select(choices=choices_list, attrs={'class':'form-control'}),
             'summary': forms.TextInput(attrs={'class':'form-control'}),
             'header_image': forms.FileInput(attrs={'class':'form-control'}),

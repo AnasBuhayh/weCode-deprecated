@@ -13,6 +13,7 @@
   {% load static %}
   <!-- CSS CUSTOM -->
   <link rel="stylesheet" type="text/css" href="{% static 'weCodeBlog/css/styles.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'weCodeBlog/css/tagsinput.css' %}">
   <title>
     {% block title %}
     weCode Blog
@@ -95,8 +96,11 @@
 
   </div>
 
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+
   <!-- Vue 3 CDN -->
-  <script src="https://unpkg.com/vue@next"></script>
+  <!-- <script src="https://unpkg.com/vue@next"></script> -->
+
 
   <!-- Load Posts <not currently used> -->
   <!-- <script src="{% static 'weCodeBlog/js/load_posts.js' %}"></script> -->
@@ -104,6 +108,17 @@
   <!-- Option 1: Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
+  
+  <!-- Input tags Javascript -->
+  <script src="{% static 'weCodeBlog/js/tagsinput.js' %}"></script>
+  <script>
+    $('tags').tagsinput({
+      maxTags: 5,
+      maxChars: 8,
+      allowDuplicates: false,
+      
+    });
   </script>
 
   <!-- Option 2: Separate Popper and Bootstrap JS -->
