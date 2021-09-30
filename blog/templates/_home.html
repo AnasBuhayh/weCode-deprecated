@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<br>
+<h2 style="color: red;">مقالات مميزة</h2>
+<br>
+
+<div id="posts">
+    {% for post in featured %}
+    <small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.date_published|date:"d/m/Y" }}</small>
+    <br>
+    <h2><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a> </h2>
+    <p> {{ post.summary }} </p>
+    <img src="{{ post.header_image.url }}" class="img-fluid mx-auto d-block" alt="">
+    <p>{{ post.body|slice:":200"|safe }}</p>
+    <small><a href="{% url 'category' post.category.slug %}">{{ post.category }}</a></small>
+    <hr>
+    {% endfor %}
+</div>
+
+<br>
+<h2 style="color: red;">الأكثر قراءة</h2>
+<br>
+
+    {% for post in popular %}
+    <small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.date_published|date:"d/m/Y" }}</small>
+    <br>
+    <h2><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a> </h2>
+    <p> {{ post.summary }} </p>
+    <img src="{{ post.header_image.url }}" class="img-fluid mx-auto d-block" alt="">
+    <p>{{ post.body|slice:":200"|safe }}</p>
+    <small><a href="{% url 'category' post.category.slug %}">{{ post.category }}</a></small>
+    <hr>
+    {% endfor %}
+
+<br>
+<h2 style="color: red;">مقالات جديدة</h2>
+<br>
+
+    {% for post in posts %}
+    <small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.date_published|date:"d/m/Y" }}</small>
+    <br>
+    <h2><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a> </h2>
+    <p> {{ post.summary }} </p>
+    <img src="{{ post.header_image.url }}" class="img-fluid mx-auto d-block" alt="">
+    <p>{{ post.body|slice:":200"|safe }}</p>
+    <small><a href="{% url 'category' post.category.slug %}">{{ post.category }}</a></small>
+    <hr>
+    {% endfor %}
+
+{% endblock %}

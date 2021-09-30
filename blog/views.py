@@ -18,14 +18,16 @@ class HomeView(ListView):
     
     def get_context_data(self, **kwargs):
         posts = Post.objects.order_by('-post_date')
-        featured = posts.filter(featured=True)[:1]
-        popular = posts.order_by('-views')[:3]
+        featured = posts.filter(featured=True).order_by('-post_date')[:2]
+        featured_categories = posts.filter(featured=True).order_by('-post_date')[:3]
+        popular = posts.order_by('-views')[:6]
         
         context = super().get_context_data(**kwargs)
         context = {
             'posts' : posts,
             'featured': featured,
             'popular': popular,
+            'featured_categories': featured_categories,
         }
 
         return context
@@ -84,6 +86,7 @@ class AddPostView(CreateView):
 
     # gets the user id
     def form_valid(self, form):
+        print(form)
         form.instance.author = self.request.user
         return super().form_valid(form)
 

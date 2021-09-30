@@ -1,0 +1,12 @@
+.footer-logo{
+    text-align: end;
+}
+.footer-widget{
+    text-align: end;
+
+}
+
+.footer-nav li {
+    display: inline-block;
+    margin-left: 15px;
+}

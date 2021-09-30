@@ -1,52 +1,187 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
-<br>
-<h2 style="color: red;">مقالات مميزة</h2>
-<br>
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">	
+            <!-- post -->
+            {% for post in featured %}
+            <div class="col-md-6">
+                <div class="post post-thumb">
+                    <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
+                    <div class="post-body">
+                        <div class="post-meta">
+                            <a class="post-category cat-2" href="{% url 'category' post.category.slug %}">{{ post.category }}</a>
+                            <span class="post-date">{{ post.post_date|date:"d/m/Y" }}</span>
+                        </div>
+                        <h3 class="post-title"><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h3>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- /post -->
+        </div>
+        <!-- /row -->
 
-<div id="posts">
-    {% for post in featured %}
-    <small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.date_published|date:"d/m/Y" }}</small>
-    <br>
-    <h2><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a> </h2>
-    <p> {{ post.summary }} </p>
-    <img src="{{ post.header_image.url }}" class="img-fluid mx-auto d-block" alt="">
-    <p>{{ post.body|slice:":200"|safe }}</p>
-    <small><a href="{% url 'category' post.category.slug %}">{{ post.category }}</a></small>
-    <hr>
-    {% endfor %}
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2>الأكثر قراءة</h2>
+                </div>
+            </div>
+
+            <!-- post -->
+            {% for post in popular %}
+            <div class="col-md-4">
+                <div class="post">
+                    <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
+                    <div class="post-body">
+                        <div class="post-meta">
+                            <a class="post-category cat-1" href="{% url 'category' post.category.slug %}">{{ post.category }}</a>
+                            <span class="post-date">{{ post.post_date|date:"d/m/Y" }}</span>
+                        </div>
+                        <h3 class="post-title"><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h3>
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter == 3 %}
+            <div class="clearfix visible-md visible-lg"></div>
+            {% endif %}
+            {% endfor %}
+            <!-- /post -->
+        </div>
+    </div>
+    <!-- /container -->
 </div>
 
-<br>
-<h2 style="color: red;">الأكثر قراءة</h2>
-<br>
+<!-- section -->
+<div class="section section-grey">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <h2>مناشير مميزة</h2>
+                </div>
+            </div>
 
-    {% for post in popular %}
-    <small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.date_published|date:"d/m/Y" }}</small>
-    <br>
-    <h2><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a> </h2>
-    <p> {{ post.summary }} </p>
-    <img src="{{ post.header_image.url }}" class="img-fluid mx-auto d-block" alt="">
-    <p>{{ post.body|slice:":200"|safe }}</p>
-    <small><a href="{% url 'category' post.category.slug %}">{{ post.category }}</a></small>
-    <hr>
-    {% endfor %}
+            <!-- post -->
+            {% for post in featured_categories %}
+            <div class="col-md-4">
+                <div class="post">
+                    <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
+                    <div class="post-body">
+                        <div class="post-meta">
+                            <a class="post-category cat-2" href="{% url 'category' post.category.slug %}">{{ post.category }}</a>
+                            <span class="post-date">{{ post.post_date|date:"d/m/Y" }}</span>
+                        </div>
+                        <h3 class="post-title"><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h3>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- /post -->
 
-<br>
-<h2 style="color: red;">مقالات جديدة</h2>
-<br>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->
 
-    {% for post in posts %}
-    <small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.date_published|date:"d/m/Y" }}</small>
-    <br>
-    <h2><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a> </h2>
-    <p> {{ post.summary }} </p>
-    <img src="{{ post.header_image.url }}" class="img-fluid mx-auto d-block" alt="">
-    <p>{{ post.body|slice:":200"|safe }}</p>
-    <small><a href="{% url 'category' post.category.slug %}">{{ post.category }}</a></small>
-    <hr>
-    {% endfor %}
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-4">
+                <!-- ad -->
+                <div class="aside-widget text-center">
+                    <a href="#" style="display: inline-block;margin: auto;">
+                        <img class="img-responsive" src="./img/ad-1.jpg" alt="">
+                    </a>
+                </div>
+                <!-- /ad -->
+                
+                <!-- catagories -->
+                <div class="aside-widget">	
+                    <div class="section-title">
+                        <h2>العلامات</h2>
+                    </div>
+                    <div class="category-widget">
+                        <ul>
+                            <li><a href="#" class="cat-1"><span class="to-left">340</span>Web Design</a></li>
+                            <li><a href="#" class="cat-2">JavaScript<span  class="to-left">74</span></a></li>
+                            <li><a href="#" class="cat-4">JQuery<span  class="to-left">41</span></a></li>
+                            <li><a href="#" class="cat-3">CSS<span  class="to-left">35</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /catagories -->
+                
+                <!-- tags -->
+                <div class="aside-widget">
+                    <div class="tags-widget">
+                        <ul>
+                            <li><a href="#">Chrome</a></li>
+                            <li><a href="#">CSS</a></li>
+                            <li><a href="#">Tutorial</a></li>
+                            <li><a href="#">Backend</a></li>
+                            <li><a href="#">JQuery</a></li>
+                            <li><a href="#">Design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">JavaScript</a></li>
+                            <li><a href="#">Website</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /tags -->
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-title">
+                            <h2>مناشير جديدة</h2>
+                        </div>
+                    </div>
+                    <!-- post -->
+                    {% for post in posts %}
+                    <div class="col-md-12">
+                        <div class="post post-row">
+                            <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
+                            <div class="post-body">
+                                <div class="post-meta">
+                                    <a class="post-category cat-2" href="{% url 'category' post.category.slug %}">{{ post.category }}</a>
+                                    <span class="post-date">{{ post.post_date|date:"d/m/Y" }}</span>
+                                </div>
+                                <h3 class="post-title"><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h3>
+                                <p>{{ post.summary }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- /post -->
+                    
+                    <div class="col-md-12">
+                        <div class="section-row">
+                            <button class="primary-button center-block">Load More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->
 
 {% endblock %}

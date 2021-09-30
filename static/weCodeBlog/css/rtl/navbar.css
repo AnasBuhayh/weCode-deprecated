@@ -1,0 +1,54 @@
+.nav-menu {
+    margin-right: 20px;
+    float: right !important;
+}
+
+.nav-logo{
+    float: right !important;
+}
+
+.nav-btns{
+    float: left !important;
+}
+
+.nav-btns .search-form .search-input {
+    height: 100%;
+    width: 100%;
+    border: none;
+    background: #FFF;
+    padding: 0px;
+    font-weight: 600;
+    direction: rtl;
+    padding-right: 10px !important;
+
+}
+
+.nav-btns .search-form .search-close {
+    position: absolute;
+    top: 50%;
+    left: 25px;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    line-height: 20px;
+    color: #212631;
+    font-size: 22px;
+    padding: 0;
+}
+
+.nav-aside-menu, .section-row,.post ,.post-thumb,ul{
+    text-align: end !important;
+}
+.post-body{
+    right: 0px;
+}
+
+.section-title{
+    text-align: end;
+}
+
+.to-left{
+    float: left !important;
+}
