@@ -9,7 +9,8 @@ from rest_framework.pagination import PageNumberPagination
 from .serializers import PostSerializer
 from hitcount.views import HitCountDetailView
 from taggit.models import Tag
-
+from django.http import JsonResponse
+from django.core import serializers
 
 class HomeView(ListView):
     model = Post
@@ -103,14 +104,14 @@ class DeletePostView(DeleteView):
     success_url = reverse_lazy('home')
 
 
-# gets posts for vue paginator <not currently used>
-@api_view(['GET'])
-def GetPosts(request):
-    posts = Post.objects.all()
-    paginator = PageNumberPagination()
-    paginator.page_size = 3
-    results = paginator.paginate_queryset(posts, request)
-
-    serializer = PostSerializer(results, many=True)
-
-    return paginator.get_paginated_response(serializer.data)
+def LoadMore(request):
+    offset = int(request.POST['offset'])
+    limit = 2
+    posts = Post.objects.all()[offset:offset+limit]
+    totalData = Post.objects.count()
+    data = {}
+    posts__json = serializers.serialize('json',posts)
+    return JsonResponse(data={
+        'posts':posts__json,
+        'totalResult':totalData
+    })

@@ -151,26 +151,29 @@
                         </div>
                     </div>
                     <!-- post -->
-                    {% for post in posts %}
-                    <div class="col-md-12">
-                        <div class="post post-row">
-                            <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
-                            <div class="post-body">
-                                <div class="post-meta">
-                                    <a class="post-category cat-2" href="{% url 'category' post.category.slug %}">{{ post.category }}</a>
-                                    <span class="post-date">{{ post.post_date|date:"d/m/Y" }}</span>
+                    <div id="recent-posts">
+                        {% for post in posts %}
+                        <div class="col-md-12">
+                            <div class="post post-row">
+                                <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
+                                <div class="post-body">
+                                    <div class="post-meta">
+                                        <a class="post-category cat-2" href="{% url 'category' post.category.slug %}">{{ post.category }}</a>
+                                        <span class="post-date">{{ post.post_date|date:"d/m/Y" }}</span>
+                                    </div>
+                                    <h3 class="post-title"><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h3>
+                                    <p>{{ post.summary }}</p>
                                 </div>
-                                <h3 class="post-title"><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h3>
-                                <p>{{ post.summary }}</p>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
+                    
                     <!-- /post -->
                     
                     <div class="col-md-12">
                         <div class="section-row">
-                            <button class="primary-button center-block">Load More</button>
+                            <button class="primary-button center-block" id="load-more-button">Load More</button>
                         </div>
                     </div>
                 </div>
@@ -183,5 +186,29 @@
     <!-- /container -->
 </div>
 <!-- /section -->
+
+<script>
+    $(document).ready(function(){
+        $("#load-more-button").on('click',function(){
+            var _currentResult=$('#recent-posts').length;
+            //run Ajax
+            $.ajax({
+                url:"{% url 'load-more' %}",
+                type:'post',
+                data:{
+                    'offset':_currentResult,
+                    'csrfmiddlewaretoken':"{{csrf_token}}",
+                },
+                dataType:'json',
+                beforeSend:function(){
+                   $('#load-more-button').addClass('disabled').text('loading...');
+                },
+                success:function(res){
+                    console.log(res);
+                }
+            })
+        })
+    })
+</script>
 
 {% endblock %}
