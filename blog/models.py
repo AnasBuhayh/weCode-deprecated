@@ -43,7 +43,7 @@ class Post(models.Model, HitCountMixin):
         ordering = ('-post_date',)
 
     def __str__(self):
-        return self.title + ' | ' + str(self.author)
+        return self.title + ' | ' + str(self.author) + ' | ' + str(self.post_date)
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={"slug":self.slug})

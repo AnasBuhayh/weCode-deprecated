@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 
 <!-- section -->
 <div class="section">
@@ -15,7 +16,7 @@
                     <div class="post-body">
                         <div class="post-meta">
                             <a class="post-category cat-2" href="{% url 'category' post.category.slug %}">{{ post.category }}</a>
-                            <span class="post-date">{{ post.post_date|date:"d/m/Y" }}</span>
+                            <span class="post-date">{{ post.post_date|date:"Y-m-d" }}</span>
                         </div>
                         <h3 class="post-title"><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h3>
                     </div>
@@ -42,7 +43,7 @@
                     <div class="post-body">
                         <div class="post-meta">
                             <a class="post-category cat-1" href="{% url 'category' post.category.slug %}">{{ post.category }}</a>
-                            <span class="post-date">{{ post.post_date|date:"d/m/Y" }}</span>
+                            <span class="post-date">{{ post.post_date|date:"Y-m-d" }}</span>
                         </div>
                         <h3 class="post-title"><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h3>
                     </div>
@@ -78,7 +79,7 @@
                     <div class="post-body">
                         <div class="post-meta">
                             <a class="post-category cat-2" href="{% url 'category' post.category.slug %}">{{ post.category }}</a>
-                            <span class="post-date">{{ post.post_date|date:"d/m/Y" }}</span>
+                            <span class="post-date">{{ post.post_date|date:"Y-m-d"}}</span>
                         </div>
                         <h3 class="post-title"><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h3>
                     </div>
@@ -152,14 +153,14 @@
                     </div>
                     <!-- post -->
                     <div id="recent-posts">
-                        {% for post in posts %}
+                        {% for post in recent %}
                         <div class="col-md-12">
                             <div class="post post-row">
                                 <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
                                 <div class="post-body">
                                     <div class="post-meta">
-                                        <a class="post-category cat-2" href="{% url 'category' post.category.slug %}">{{ post.category }}</a>
-                                        <span class="post-date">{{ post.post_date|date:"d/m/Y" }}</span>
+                                        <!-- <a class="post-category cat-2" href="{% url 'category' post.category.slug %}">{{ post.category }}</a> -->
+                                        <span class="post-date">{{ post.post_date|date:"Y-m-d" }}</span>
                                     </div>
                                     <h3 class="post-title"><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h3>
                                     <p>{{ post.summary }}</p>
@@ -189,26 +190,49 @@
 
 <script>
     $(document).ready(function(){
-        $("#load-more-button").on('click',function(){
-            var _currentResult=$('#recent-posts').length;
-            //run Ajax
-            $.ajax({
-                url:"{% url 'load-more' %}",
-                type:'post',
-                data:{
-                    'offset':_currentResult,
-                    'csrfmiddlewaretoken':"{{csrf_token}}",
-                },
-                dataType:'json',
-                beforeSend:function(){
-                   $('#load-more-button').addClass('disabled').text('loading...');
-                },
-                success:function(res){
-                    console.log(res);
+    $("#load-more-button").on('click',function(){
+        var _currentResult=$('.post-row').length;
+        //run Ajax
+        $.ajax({
+            url:"{% url 'load-more' %}",
+            type:'post',
+            data:{
+                'offset':_currentResult,
+                'csrfmiddlewaretoken':"{{csrf_token}}",
+            },
+            dataType:'json',
+            beforeSend:function(){
+               $('#load-more-button').addClass('disabled').text('loading...');
+            },
+            success:function(res){
+                console.log(res.totalResult)
+                var _html = '';
+                var json_data = $.parseJSON(res.posts);
+                $.each(json_data, function(index, data){
+                    _html+='<div class="col-md-12">\
+                        <div class="post post-row">\
+                            <a class="post-img" href="'+'\posts\\'+data.fields.slug+'"><img src="'+'\media\\'+data.fields.header_image+'" alt=""></a>\
+                            <div class="post-body">\
+                                <div class="post-meta">\
+                                    <span class="post-date">'+data.fields.post_date+'</span>\
+                                </div>\
+                                <h3 class="post-title"><a href="'+'\posts\\'+data.fields.slug+'">'+data.fields.title+'</a></h3>\
+                                <p>'+data.fields.summary+'</p>\
+                            </div>\
+                        </div>\
+                    </div>'
+                });
+                $("#recent-posts").append(_html);
+                var _countTotal=$('.post-row').length;
+                if(_countTotal==res.totalResult){
+                    $('#load-more-button').remove();
+                }else{
+                    $('#load-more-button').removeClass('disabled').text('Load more');
                 }
-            })
+            }
         })
     })
+})
 </script>
 
 {% endblock %}

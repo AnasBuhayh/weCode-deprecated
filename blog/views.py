@@ -22,10 +22,11 @@ class HomeView(ListView):
         featured = posts.filter(featured=True).order_by('-post_date')[:2]
         featured_categories = posts.filter(featured=True).order_by('-post_date')[:3]
         popular = posts.order_by('-views')[:6]
+        recent = posts[:2]
         
         context = super().get_context_data(**kwargs)
         context = {
-            'posts' : posts,
+            'recent' : recent,
             'featured': featured,
             'popular': popular,
             'featured_categories': featured_categories,
@@ -105,13 +106,13 @@ class DeletePostView(DeleteView):
 
 
 def LoadMore(request):
-    offset = int(request.POST['offset'])
-    limit = 2
-    posts = Post.objects.all()[offset:offset+limit]
-    totalData = Post.objects.count()
-    data = {}
-    posts__json = serializers.serialize('json',posts)
-    return JsonResponse(data={
-        'posts':posts__json,
-        'totalResult':totalData
-    })
+            offset = int(request.POST['offset'])
+            limit = 2
+            posts = Post.objects.order_by('-post_date')[offset:limit+offset]
+            totalData = Post.objects.count()
+            data = {}
+            posts__json = serializers.serialize('json',posts)
+            return JsonResponse(data={
+                'posts':posts__json,
+                'totalResult':totalData
+            })
