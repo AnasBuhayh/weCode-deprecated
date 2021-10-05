@@ -4,101 +4,225 @@
 {% block title %} weCode -  {{ post.title_tag }} {% endblock %}
 {% block content %}
 
-<h1>{{ post.title }}</h1>
-<small>
-    {{ post.author.first_name }} {{ post.author.last_name }} | 
-    {% if user.id == post.author.id  %}
-    <a href="{% url 'update-post' post.slug %}">تعديل</a> - <a href="{% url 'delete-post' post.slug %}">حذف</a>
-    <br>
-    {% endif %}
-    {{ post.post_date }}
-</small>
-<hr>
-
-<br>
-<br>
-{{ post.sumamry}}
-<br>
-<br>
-
-{% if post.header_image %}
-    <br>
-    <img src="{{ post.header_image.url }}" alt="">
-{% endif %}
-
-<br>
-<br>
-{{ post.body|safe }}
-<br>
-<br>
-
-{% if post.author.profile %}
-<div class="card mb-3">
-    <div class="row g-0">
-        <div class="col-md-2">
-        {% if post.author.profile.profile_pic %}
-        <img src="{{ post.author.profile.profile_pic.url  }}" class="img-fluid rounded-start" alt="profile picture">
-        {% else %}
-        <img src="{% static 'blog\images\default-picture.png' %}" class="img-fluid rounded-start" alt="profile picture">
-        {% endif %}
-        </div>
-        <div class="col-md-10">
-        <div class="card-body">
-            <h5 class="card-title"><a href="{% url 'show-profile-page' post.author.profile.id %}">{{ post.author.first_name }} {{ post.author.last_name }}</a></h5>
-            <p class="card-text"><small class="text-muted">
-                {% if post.author.profile.website_url %}
-                    <a href="{{ post.author.profile.website_url }}">Website</a> | 
-                {% endif %}
-                {% if post.author.profile.facebook_url %}
-                    <a href="{{ post.author.profile.facebook_url }}">Facebook</a> |
-                {% endif %}
-                {% if post.author.profile.twitter_url %}
-                    <a href="{{ post.author.profile.twitter_url }}">Twitter</a> | 
-                {% endif %}
-                {% if post.author.profile.github_url %}
-                    <a href="{{ post.author.profile.github_url }}">GitHub</a>
-                {% endif %}
-            </small></p>
-            <p class="card-text">{{ post.author.profile.bio }}</p>
-        </div>
+<!-- Page Header -->
+<div id="post-header" class="page-header">
+    <div class="background-img" style="background-image: url('{{ post.header_image.url }}');"></div>
+    <div class="container">
+        <div class="row" style="text-align: end;">
+            <div class="col-md-12">
+                <div class="post-meta">
+                    <a class="post-category cat-2" href="{% url 'category' post.category.slug %}">{{ post.category }}</a>
+                    <span class="post-date">{{ post.date_published|date:"Y-m-d" }}</span>
+                </div>
+                <h1>{{ post.title }}</h1>
+            </div>
         </div>
     </div>
 </div>
-{% endif %}
+<!-- /Page Header -->
 
-<hr>
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">  
 
-<br>
-<h2>التعليقات</h2>
+            <!-- aside -->
+            <div class="col-md-4">
+                <!-- <div class="post-shares sticky-shares" style="float: left;">
+                    <a href="#" class="share-facebook"><i class="fa fa-facebook"></i></a>
+                    <a href="#" class="share-twitter"><i class="fa fa-twitter"></i></a>
+                    <a href="#" class="share-google-plus"><i class="fa fa-google-plus"></i></a>
+                    <a href="#" class="share-pinterest"><i class="fa fa-pinterest"></i></a>
+                    <a href="#" class="share-linkedin"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-envelope"></i></a>
+                </div> -->
+                <!-- ad -->
+                <!-- <div class="aside-widget text-center">
+                    <a href="#" style="display: inline-block;margin: auto;">
+                        <img class="img-responsive" src="./img/ad-1.jpg" alt="">
+                    </a>
+                </div> -->
+                <!-- /ad -->
 
-{% if post.comments %}  
-    {% for comment in post.comments.all %} 
-    <strong>
-        {{ comment.name }} -
-        {{ comment.post_date }} - <br>
-    </strong>
-        {{ comment.body }}
-    {% endfor %}
-{% endif %}
+                <!-- post widget -->
+                <!-- <div class="aside-widget">
+                    <div class="section-title">
+                        <h2>Most Read</h2>
+                    </div>
 
-<br>
-<br>
+                    <div class="post post-widget">
+                        <a class="post-img" href="blog-post.html"><img src="./img/widget-1.jpg" alt=""></a>
+                        <div class="post-body">
+                            <h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
+                        </div>
+                    </div>
 
-{% if user.is_authenticated %}
-    <h3>إضافة تعليق</h3>
-    <div class="form-group">
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p}}
-            <br>
-            <button class="btn btn-secondary">إضافة تعليق</button>
-        </form>
+                    <div class="post post-widget">
+                        <a class="post-img" href="blog-post.html"><img src="./img/widget-2.jpg" alt=""></a>
+                        <div class="post-body">
+                            <h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
+                        </div>
+                    </div>
+
+                    <div class="post post-widget">
+                        <a class="post-img" href="blog-post.html"><img src="./img/widget-3.jpg" alt=""></a>
+                        <div class="post-body">
+                            <h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
+                        </div>
+                    </div>
+
+                    <div class="post post-widget">
+                        <a class="post-img" href="blog-post.html"><img src="./img/widget-4.jpg" alt=""></a>
+                        <div class="post-body">
+                            <h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- /post widget -->
+
+                <!-- post widget -->
+                <!-- <div class="aside-widget">
+                    <div class="section-title">
+                        <h2>Featured Posts</h2>
+                    </div>
+                    <div class="post post-thumb">
+                        <a class="post-img" href="blog-post.html"><img src="./img/post-2.jpg" alt=""></a>
+                        <div class="post-body">
+                            <div class="post-meta">
+                                <a class="post-category cat-3" href="#">Jquery</a>
+                                <span class="post-date">March 27, 2018</span>
+                            </div>
+                            <h3 class="post-title"><a href="blog-post.html">Ask HN: Does Anybody Still Use JQuery?</a></h3>
+                        </div>
+                    </div>
+
+                    <div class="post post-thumb">
+                        <a class="post-img" href="blog-post.html"><img src="./img/post-1.jpg" alt=""></a>
+                        <div class="post-body">
+                            <div class="post-meta">
+                                <a class="post-category cat-2" href="#">JavaScript</a>
+                                <span class="post-date">March 27, 2018</span>
+                            </div>
+                            <h3 class="post-title"><a href="blog-post.html">Chrome Extension Protects Against JavaScript-Based CPU Side-Channel Attacks</a></h3>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- /post widget -->
+            </div>
+
+            <!-- /aside -->
+                <!-- Post content -->
+                <div class="col-md-8">
+                    <div class="section-row sticky-container">
+                        <div class="main-post">
+                            <h3>{{ post.title }}</h3>
+                            <small>
+                                {{ post.author.first_name }} {{ post.author.last_name }} | 
+                                {% if user.id == post.author.id  %}
+                                <a href="{% url 'update-post' post.slug %}">تعديل</a> - <a href="{% url 'delete-post' post.slug %}">حذف</a>
+                                <br>
+                                {% endif %}
+                                {{ post.post_date|date:"Y-m-d" }}
+                            </small>
+                            <br><br>
+                            {{ post.body|safe }}
+                        </div>
+                    
+                    </div>
+
+                    <!-- ad -->
+                    <div class="section-row text-center">
+                        <a href="#" style="display: inline-block;margin: auto;">
+                            <img class="img-responsive" src="./img/ad-2.jpg" alt="">
+                        </a>
+                    </div>
+                    <!-- ad -->
+                    
+                    <!-- author -->
+                    {% if post.author.profile %}
+                    <div class="section-row">
+                        <div class="post-author">
+                            <div class="media">
+                                <div class="media-left">
+                                    <img class="media-object" src="./img/author.png" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <div class="media-heading">
+                                        <h3>{{ post.author.first_name }} {{ post.author.last_name }}</h3>
+                                    </div>
+                                    <p>{{ post.author.profile.bio }}</p>
+                                    <ul class="author-social">
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <!-- /author -->س
+                    
+                    <!-- comments -->
+                    {% if post.comments %}  
+                    <div class="section-row">
+                        <div class="section-title">
+                            <h2>التعلقيقات</h2>
+                        </div>
+
+                        <div class="post-comments">
+                            {% for comment in post.comments.all %} 
+                            <!-- comment -->
+                            <div class="media">
+                                <div class="media-left">
+                                    <img class="media-object" src="./img/avatar.png" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <div class="media-heading">
+                                        <h4>{{ comment.name }}</h4>
+                                        <span class="time">{{ comment.post_date }}</span>
+                                    </div>
+                                    <p>{{ comment.body }}</p>
+                                </div>
+                            </div>
+                            <!-- /comment -->
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    <!-- /comments -->
+                    
+
+                    
+                    <!-- reply -->
+                    {% if user.is_authenticated %}
+                    <div class="section-row">
+                        <div class="section-title">
+                            <h2>أترك تعليق</h2>
+                            <p>يمكنك إضافة تعليق في المربع الأسفل</p>
+                        </div>
+                        <form class="post-reply" method="POST">
+                            {% csrf_token %}
+                            {{ form.as_p}}
+                            <br>
+                            <button class="primary-button">إضافة تعليق</button>
+                        </form>
+                    </div>
+                    {% endif %}
+                    <!-- /reply -->
+                    
+
+                </div>
+                <!-- /Post content -->
+
+        </div>
+        <!-- /row -->
     </div>
-{% endif %}
+    <!-- /container -->
+</div>
+<!-- /section -->
 
-
-<br>
-<br>
-
-<a href="{% url 'home' %}" class="btn btn-secondary">رجوع</a>
 {% endblock %}

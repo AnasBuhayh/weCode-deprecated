@@ -83,20 +83,11 @@
     </div>
   </nav>
 
-  <div class="container">
-    {% block content %}
-          
-    {% endblock %}
-
-    <!-- For vue pagination <not currently used> -->
-    <!-- <div id="posts">
-      <div v-for="post in posts" v-bind:key="post.id">
-        <h1>[[ post.title ]]</h1>
-        <p>[[ post.body ]]</p>
-      </div>
-    </div> -->
-
-  </div>
+  
+  {% block content %}
+  
+    
+  {% endblock %}
 
   <!-- Vue 3 CDN -->
   <!-- <script src="https://unpkg.com/vue@next"></script> -->
