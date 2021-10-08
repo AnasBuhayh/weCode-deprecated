@@ -7,10 +7,13 @@ The source code of WeCode.ly blog
 
 # Installation
 
-### Database setup
+### Local database setup
 
 - Create new Postgres database
-- Restore the template database  `/database/default_db.sql`
+
+### Development database setup
+
+- Please email me at anas.buhayh@gmail.com if you would like to connect to the live database
 
 ### App Setup
 
@@ -18,25 +21,44 @@ The source code of WeCode.ly blog
 
 `https://github.com/AnasBuhayh/weCode.git`
 
-- Add your newly created database name and credentials in the settings.py file
+- Chenge the database variables to your newly created ones in the settings.py file
+
+```
+NAME = '[database name]'
+USER = '[database user]'
+PASSWORD = '[database password]'
+HOST = 'localhost'
+PORT = '5432'
+```
 
 - *Recomended:* Create a virtual environment
 
-`python -m venv myEnv`
+`python -m venv [env-name]`
 
 - *Recomended:* Run virtual environment
 
-`.\myEnv\Scripts\activate`
+`.\[env-name]\Scripts\activate`
 
 - Install requirements
 
 `pip install -r .\requirements.txt`
 
+- Comment the line below from  weCode/urls.py
+
+`path('', include('blog.urls')),`
+
+- Make migrations
+
+`python manage.py makemigrations`
+
+then
+
+`python manage.py migrate`
+
+- Create superuser
+
+`python manage.py createsuperuser`
+
 - Run application
 
 `python ./manage.py runserver`
-
-### django user credentials
-
-- username : admin
-- password : Admin_2020

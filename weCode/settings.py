@@ -13,6 +13,21 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 
+# This code checks if you have the SECRET.py file to connect to the live server.
+# For more info email anas.buhayh@gmail.com
+if Path("weCode/SECRET.py").is_file():
+    print("Live Database")
+    from .SECRET import *
+else:
+    print("Local Database")
+    NAME = 'blog_db'
+    USER = 'postgres'
+    PASSWORD = 'admin'
+    HOST = 'localhost'
+    PORT = '5432'
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -84,14 +99,13 @@ WSGI_APPLICATION = 'weCode.wsgi.application'
 
 
 DATABASES = {
-
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'blog_db',
-        'USER': 'postgres',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': NAME,
+        'USER': USER,
+        'PASSWORD': PASSWORD,
+        'HOST': HOST,
+        'PORT': PORT,
     }
 
 }
