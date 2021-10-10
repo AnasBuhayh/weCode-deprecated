@@ -51,15 +51,15 @@
 					<div class="container">
 						<!-- logo -->
 						<div class="nav-logo">
-							<a href="index.html" class="logo"><img src="{% static 'weCodeBlog/images/logo.png' %}" alt=""></a>
+							<a href="/" class="logo"><img src="{% static 'weCodeBlog/images/logo.png' %}" alt=""></a>
 						</div>
 						<!-- /logo -->
 
 						<!-- nav -->
-						<ul class="nav-menu nav navbar-nav">
-							<li class="cat-1"><a href="category.html">مقالات</a></li>
-							<li class="cat-2"><a href="category.html">أخبار</a></li>
-							<li class="cat-3"><a href="category.html">دروس</a></li>
+						<ul class="nav-menu nav navbar-nav" dir="rtl">
+							<li class="cat-1"><a href="/category/articles/">مقالات</a></li>
+							<li class="cat-2"><a href="/category/news/">أخبار</a></li>
+							<li class="cat-3"><a href="/category/tutorials/">دروس</a></li>
 						</ul>
 						<!-- /nav -->
 
@@ -83,18 +83,20 @@
 					<div class="section-row">
 						<ul class="nav-aside-menu">
                             {% if user.is_authenticated %}
-                                <li><a href="#">{{ user.username }}</a></li>
+                                <li><a href="#">{{ user.username }} مرحبا</a></li>
+								<hr>
                                 <li><a href="{% url 'add-post' %}">إضافة مقالة</a></li>
                                 <hr>
                                 {% if user.profile.id %}
-                                    <li><a href="#">حساب المستخدم</a></li>
-                                    <li><a href="#">تعديل البيانات</a></li>
+                                    <li><a href="{% url 'show-profile-page' user.profile.id %}">حساب المستخدم</a></li>
+                                    <li><a href="{% url 'edit-profile-page' user.profile.id %}">تعديل البيانات</a></li>
                                     {% else %}
                                     <li><a href="{% url 'edit-profile' %}">تعديل الإعدادات</a></li>
                                     <li><a href="{% url 'create-profile-page' %}">البيانات الشخصية</a></li>
                                 {% endif %}
-                                <li><a href="#">الخروج</a></li>
-                                {% else %}
+								<hr>
+                                <li><a href="{% url 'logout' %}">الخروج</a></li>
+							{% else %}
                                 <li><a href="{% url 'login' %}">تسجيل الدخول</a></li>
                             {% endif %}
 						</ul>
@@ -126,19 +128,19 @@
 					
 					<div class="col-md-3">
 						<div class="footer-widget">
-							<h3 class="footer-title">Join our Newsletter</h3>
+							<!-- <h3 class="footer-title">Join our Newsletter</h3>
 							<div class="footer-newsletter">
 								<form>
 									<input class="input" type="email" name="newsletter" placeholder="Enter your email">
 									<button class="newsletter-btn"><i class="fa fa-paper-plane"></i></button>
 								</form>
-							</div>
-							<ul class="footer-social">
+							</div> -->
+							<!-- <ul class="footer-social">
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
 								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-							</ul>
+							</ul> -->
 						</div>
 					</div>
 
@@ -146,22 +148,21 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="footer-widget">
-									<h3 class="footer-title">About Us</h3>
+									<h3 class="footer-title">weCode Libya</h3>
 									<ul class="footer-links">
-										<li><a href="about.html">About Us</a></li>
-										<li><a href="#">Join Us</a></li>
-										<li><a href="contact.html">Contacts</a></li>
+										<li><a href="about.html">عن المجموعة</a></li>
+										<li><a href="#">التسجيل</a></li>
+										<li><a href="contact.html">تواصل معنا</a></li>
 									</ul>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="footer-widget">
-									<h3 class="footer-title">Catagories</h3>
+									<h3 class="footer-title">التصنيفات</h3>
 									<ul class="footer-links">
-										<li><a href="category.html">Web Design</a></li>
-										<li><a href="category.html">JavaScript</a></li>
-										<li><a href="category.html">Css</a></li>
-										<li><a href="category.html">Jquery</a></li>
+										<li><a href="category.html">مقالات</a></li>
+										<li><a href="category.html">أخبار</a></li>
+										<li><a href="category.html">دروس</a></li>
 									</ul>
 								</div>
 							</div>
@@ -170,11 +171,11 @@
 					<div class="col-md-5">
 						<div class="footer-widget">
 							<div class="footer-logo">
-								<a href="index.html" class="logo"><img src="{% static 'weCodeBlog/images/logo.png' %}" alt=""></a>
+								<a href="/" class="logo"><img src="{% static 'weCodeBlog/images/logo.png' %}" alt=""></a>
 							</div>
 							<ul class="footer-nav">
-								<li><a href="#">Privacy Policy</a></li>
-								<li><a href="#">Advertisement</a></li>
+								<li><a href="#">سياسات الخصوصية</a></li>
+								<li><a href="#">الإعلانات</a></li>
 							</ul>
 							<div class="footer-copyright">
 								<span>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -183,9 +184,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 							</div>
 						</div>
 					</div>
-
-					
-
 				</div>
 				<!-- /row -->
 			</div>

@@ -1,14 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container" dir="rtl">
-
-<br>
-<h1>Category: {{ category}}</h1>
-<br>
-
 {% if posts %}
-
+<br>
+<h1>{{ category.name }}</h1>
+<br>
 
 {% for post in posts %}
 <small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.post_date }}</small>
@@ -22,11 +18,11 @@
 <hr>
 {% endfor %}
 
+
 {% else %}
 
 <h2>عذرا. هذه الصفحة غير موجودة </h2>
 
 {% endif %}
-</div>
 
 {% endblock %}

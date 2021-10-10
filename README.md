@@ -43,7 +43,7 @@ PORT = '5432'
 
 `pip install -r .\requirements.txt`
 
-- Comment the line below from  weCode/urls.py
+- Comment the line below from  weCode/urls.py (To avoid migration complicatoins)
 
 `path('', include('blog.urls')),`
 
@@ -54,6 +54,10 @@ PORT = '5432'
 then
 
 `python manage.py migrate`
+
+- Uncomment the app link from weCode/urls.py
+
+`path('', include('blog.urls')),`
 
 - Create superuser
 

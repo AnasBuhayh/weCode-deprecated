@@ -15,7 +15,7 @@ from django.core import serializers
 class HomeView(ListView):
     model = Post
     template_name = 'home.html'
-    # paginate_by = 1
+    paginate_by = 1
     
     def get_context_data(self, **kwargs):
         posts = Post.objects.order_by('-post_date')
@@ -23,7 +23,7 @@ class HomeView(ListView):
         featured_categories = posts.filter(featured=True).order_by('-post_date')[:3]
         popular = posts.order_by('-views')[:6]
         recent = posts[:2]
-        
+
         context = super().get_context_data(**kwargs)
         context = {
             'recent' : recent,
@@ -47,14 +47,15 @@ class CategoryView(ListView):
 
     def get_context_data(self, **kwargs):
         posts = Post.objects.filter(category__slug=self.kwargs["category_slug"]).order_by('-post_date')
+        category =  Category.objects.get(slug=self.kwargs["category_slug"])
         featured = posts.filter(featured=True)[:1]
-        popular = posts.order_by('-hit_count_generic__hits')[:3]
+        # popular = posts.order_by('-hit_count_generic__hits')[:3]
 
         context = super().get_context_data(**kwargs)
         context = {
+            'category': category,
             'posts' : posts,
             'featured': featured,
-            'popular': popular,
         }
 
         return context

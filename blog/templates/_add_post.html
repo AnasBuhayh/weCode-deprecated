@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %} weCode - Add Post {{ post.title_tag }} {% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<h1>إضافة مقالة</h1>
+<br>
+
+<div class="form-group">
+{{ form.media}}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <br>
+    <button class="btn btn-secondary">إضافة</button>
+</form>
+</div>
+
+<!-- Input tags Javascript -->
+<script src="{% static 'weCodeBlog/js/tagsinput.js' %}"></script>
+<script>
+  $('tags').tagsinput({
+    maxTags: 5,
+    maxChars: 8,
+    allowDuplicates: false,
+    
+  });
+</script>
+
+{% else %}
+
+<p>صحفة خاطئة يرجى العودة <a href="{% url 'home' %}">للرئيسية</a></p>
+
+{% endif %}
+
+{% endblock %}
