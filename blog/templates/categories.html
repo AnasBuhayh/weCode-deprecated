@@ -1,32 +1,213 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container" dir="rtl">
+<!-- Page Header -->
+<div class="page-header">
+    <div class="container">
+        <div class="row" style="text-align: end;">
+            <div class="col-md-12">
+                <ul class="page-header-breadcrumb">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li>{{ category}}</li>
+                </ul>
+                <h1>{{ category}}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Page Header -->
 
-<br>
-<h1>Category: {{ category}}</h1>
-<br>
-
+<div class="container">
 {% if posts %}
 
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-4">
+                <!-- ad -->
+                <div class="aside-widget text-center">
+                    <a href="#" style="display: inline-block;margin: auto;">
+                        <img class="img-responsive" src="./img/ad-1.jpg" alt="">
+                    </a>
+                </div>
+                <!-- /ad -->
+                
+                <!-- post widget -->
+                <div class="aside-widget">
+                    <div class="section-title">
+                        <h2>الأكثر قراءة</h2>
+                    </div>
 
-{% for post in posts %}
-<small>{{ post.author.first_name }} {{ post.author.last_name }} - {{ post.post_date }}</small>
-<br>
-<h2><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a> </h2>
-<br>
-<img src="{{ post.header_image.url }}" class="img-fluid" alt="">
-<br>
-<p>{{ post.body|slice:":200"|safe }}</p>
-<small><a href="#">{{ post.category }}</a></small>
-<hr>
-{% endfor %}
+                    {% for post in popular %}
+                    <div class="post post-widget">
+                        <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
+                        <div class="post-body">
+                            <h3 class="post-title"><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h3>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+                <!-- /post widget -->
+                
+                <!-- catagories -->
+                <div class="aside-widget">
+                    <div class="section-title">
+                        <h2>التصنيفات</h2>
+                    </div>
+                    <div class="category-widget">
+                        <ul>
+                            <li><a href="#" class="cat-1">Web Design<span class="to-left">340</span></a></li>
+                            <li><a href="#" class="cat-2">JavaScript<span  class="to-left">74</span></a></li>
+                            <li><a href="#" class="cat-4">JQuery<span  class="to-left">41</span></a></li>
+                            <li><a href="#" class="cat-3">CSS<span  class="to-left">35</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /catagories -->
+                
+                <!-- tags -->
+                <div class="aside-widget">
+                    <div class="tags-widget">
+                        <ul>
+                            <li><a href="#">Chrome</a></li>
+                            <li><a href="#">CSS</a></li>
+                            <li><a href="#">Tutorial</a></li>
+                            <li><a href="#">Backend</a></li>
+                            <li><a href="#">JQuery</a></li>
+                            <li><a href="#">Design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">JavaScript</a></li>
+                            <li><a href="#">Website</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /tags -->  
+            </div>
+
+            <!-- Featured -->
+            <div class="col-md-8">
+                <div class="row">
+                                
+                    <!-- post -->
+                    {% for post in featured %}
+                    {% if forloop.counter == 1 %}
+                    <div class="col-md-12">
+                        <div class="post post-thumb">
+                    {% else %}
+                    <div class="col-md-6">
+                        <div class="post">
+                    {% endif %}
+                            <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
+                            <div class="post-body">
+                                <div class="post-meta">
+                                    <a class="post-category cat-2" href="{% url 'category' post.category.slug %}">{{ post.category }}</a>
+                                    <span class="post-date">{{ post.post_date|date:"Y-m-d" }}</span>
+                                </div>
+                                <h3 class="post-title"><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- /post -->
+                    
+                    <div class="clearfix visible-md visible-lg"></div>
+                </div>        
+            </div>  
+            <!-- /Featured -->
+            
+            <div class="col-md-8">
+                <div class="row">
+                    <!-- post -->
+                    <div id="recent-posts">
+                        {% for post in recent %}
+                        <div class="col-md-12">
+                            <div class="post post-row">
+                                <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
+                                <div class="post-body">
+                                    <div class="post-meta">
+                                        <!-- <a class="post-category cat-2" href="{% url 'category' post.category.slug %}">{{ post.category }}</a> -->
+                                        <span class="post-date">{{ post.post_date|date:"Y-m-d" }}</span>
+                                    </div>
+                                    <h3 class="post-title"><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h3>
+                                    <p>{{ post.summary }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- /post -->
+                    
+                    <div class="col-md-12">
+                        <div class="section-row">
+                            <button class="primary-button center-block" id="load-more-button">المزيد</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->
+
+<script>
+    $(document).ready(function(){
+    $("#load-more-button").on('click',function(){
+        var _currentResult=$('.post-row').length;
+        //run Ajax
+        $.ajax({
+            url:"{% url 'load-more' %}",
+            type:'post',
+            data:{
+                'offset':_currentResult,
+                'csrfmiddlewaretoken':"{{csrf_token}}",
+            },
+            dataType:'json',
+            beforeSend:function(){
+               $('#load-more-button').addClass('disabled').text('تحميل ');
+            },
+            success:function(res){
+                console.log(res.totalResult)
+                var _html = '';
+                var json_data = $.parseJSON(res.posts);
+                $.each(json_data, function(index, data){
+                    _html+='<div class="col-md-12">\
+                        <div class="post post-row">\
+                            <a class="post-img" href="'+'\posts\\'+data.fields.slug+'"><img src="'+'\media\\'+data.fields.header_image+'" alt=""></a>\
+                            <div class="post-body">\
+                                <div class="post-meta">\
+                                    <span class="post-date">'+data.fields.post_date+'</span>\
+                                </div>\
+                                <h3 class="post-title"><a href="'+'\posts\\'+data.fields.slug+'">'+data.fields.title+'</a></h3>\
+                                <p>'+data.fields.summary+'</p>\
+                            </div>\
+                        </div>\
+                    </div>'
+                });
+                $("#recent-posts").append(_html);
+                var _countTotal=$('.post-row').length;
+                if(_countTotal==res.totalResult){
+                    $('#load-more-button').remove();
+                }else{
+                    $('#load-more-button').removeClass('disabled').text('Load more');
+                }
+            }
+        })
+    })
+})
+</script>
 
 {% else %}
 
 <h2>عذرا. هذه الصفحة غير موجودة </h2>
 
-{% endif %}
 </div>
+{% endif %}
 
 {% endblock %}

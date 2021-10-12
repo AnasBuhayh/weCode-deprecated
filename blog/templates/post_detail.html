@@ -119,7 +119,7 @@
                         <div class="main-post">
                             <h3>{{ post.title }}</h3>
                             <small>
-                                {{ post.author.first_name }} {{ post.author.last_name }} | 
+                                <a href="{% url 'show-profile-page' post.author.profile.id %}">{{ post.author.first_name }} {{ post.author.last_name }}</a> | 
                                 {% if user.id == post.author.id  %}
                                 <a href="{% url 'update-post' post.slug %}">تعديل</a> - <a href="{% url 'delete-post' post.slug %}">حذف</a>
                                 <br>
@@ -150,7 +150,7 @@
                                 </div>
                                 <div class="media-body">
                                     <div class="media-heading">
-                                        <h3>{{ post.author.first_name }} {{ post.author.last_name }}</h3>
+                                        <h3><a href="{{ post.author.first_name }} {{ post.author.last_name }}">{{ post.author.first_name }} {{ post.author.last_name }}</a></h3>
                                     </div>
                                     <p>{{ post.author.profile.bio }}</p>
                                     <ul class="author-social">

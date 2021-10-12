@@ -113,7 +113,7 @@
                 <!-- catagories -->
                 <div class="aside-widget">	
                     <div class="section-title">
-                        <h2>العلامات</h2>
+                        <h2>التصنيفات</h2>
                     </div>
                     <div class="category-widget">
                         <ul>
@@ -169,12 +169,11 @@
                         </div>
                         {% endfor %}
                     </div>
-                    
                     <!-- /post -->
                     
                     <div class="col-md-12">
                         <div class="section-row">
-                            <button class="primary-button center-block" id="load-more-button">Load More</button>
+                            <button class="primary-button center-block" id="load-more-button">المزيد</button>
                         </div>
                     </div>
                 </div>
@@ -202,7 +201,7 @@
             },
             dataType:'json',
             beforeSend:function(){
-               $('#load-more-button').addClass('disabled').text('loading...');
+               $('#load-more-button').addClass('disabled').text('تحميل ');
             },
             success:function(res){
                 console.log(res.totalResult)

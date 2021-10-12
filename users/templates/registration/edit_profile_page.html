@@ -5,18 +5,33 @@
 {% if user.is_authenticated %}
 {% if user.id == profile.user.id %}
 
-<h1>تعديل البيانات</h1>
-<br>
-
-<div class="form-group">
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p}}
-    <br>
-    <button class="btn btn-secondary">حفظ</button>
-</form>
+<!-- Page Header -->
+<div class="page-header">
+    <div class="container">
+        <div class="row" style="text-align: end;">
+            <div class="col-md-12">
+                <ul class="page-header-breadcrumb">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li>تعديل البيانات</li>
+                </ul>
+                <h1>تعديل البيانات</h1>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- /Page Header -->
 
+<br><br>
+<div class="container" dir="rtl">
+    <div class="form-group">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <br>
+        <button class="btn btn-secondary">حفظ</button>
+    </form>
+    </div>
+</div>
 
 {% else %}
 

@@ -22,7 +22,7 @@ class HomeView(ListView):
         featured = posts.filter(featured=True).order_by('-post_date')[:2]
         featured_categories = posts.filter(featured=True).order_by('-post_date')[:3]
         popular = posts.order_by('-views')[:6]
-        recent = posts[:2]
+        recent = posts[:4]
 
         context = super().get_context_data(**kwargs)
         context = {
@@ -34,12 +34,6 @@ class HomeView(ListView):
 
         return context
 
-    # Get category names
-    # def get_context_data(self, *args, **kwargs):
-    #     cat_names = Category.objects.all()
-    #     context = super(HomeView, self).get_context_data(*args, **kwargs)
-    #     context["cat_names"] = cat_names
-    #     return context
 
 class CategoryView(ListView):
     model = Post
@@ -48,14 +42,17 @@ class CategoryView(ListView):
     def get_context_data(self, **kwargs):
         posts = Post.objects.filter(category__slug=self.kwargs["category_slug"]).order_by('-post_date')
         category =  Category.objects.get(slug=self.kwargs["category_slug"])
-        featured = posts.filter(featured=True)[:1]
-        # popular = posts.order_by('-hit_count_generic__hits')[:3]
+        featured = posts.filter(featured=True)[:3]
+        recent = posts[:4]
+        popular = posts.order_by('-views')[:6]
 
         context = super().get_context_data(**kwargs)
         context = {
             'category': category,
             'posts' : posts,
             'featured': featured,
+            'recent' : recent,
+            'popular': popular,
         }
 
         return context
@@ -107,13 +104,13 @@ class DeletePostView(DeleteView):
 
 
 def LoadMore(request):
-            offset = int(request.POST['offset'])
-            limit = 2
-            posts = Post.objects.order_by('-post_date')[offset:limit+offset]
-            totalData = Post.objects.count()
-            data = {}
-            posts__json = serializers.serialize('json',posts)
-            return JsonResponse(data={
-                'posts':posts__json,
-                'totalResult':totalData
-            })
+    offset = int(request.POST['offset'])
+    limit = 2
+    posts = Post.objects.order_by('-post_date')[offset:limit+offset]
+    totalData = Post.objects.count()
+    data = {}
+    posts__json = serializers.serialize('json',posts)
+    return JsonResponse(data={
+        'posts':posts__json,
+        'totalResult':totalData
+    })

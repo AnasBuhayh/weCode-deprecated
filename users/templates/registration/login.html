@@ -2,22 +2,64 @@
 {% block title %} Login {% endblock %}
 {% block content %}
 
-<div class="form-group">
-<h1>تسجيل الدخول</h1>
-
-<form method="POST">
-    {% csrf_token %}
-    <div class="form-group">
-        <input type="text" class="form-control" placeholder="اسم المستخدم" name="username">
+<!-- Page Header -->
+<div class="page-header">
+    <div class="container">
+        <div class="row" style="text-align: end;">
+            <div class="col-md-12">
+                <ul class="page-header-breadcrumb">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li>تسجيل الدخول</li>
+                </ul>
+                <h1>تسجيل الدخول</h1>
+            </div>
+        </div>
     </div>
-    <br>
-    <div class="form-group">
-        <input type="password" class="form-control" placeholder="كلمة السر" name="password">
-    </div>
-    <br>
-    <button class="btn btn-secondary">دخول</button>
-    لست مسجل؟ يمكنك التسجيل من <a href="{% url 'register' %}">هنا</a>
-</form>
 </div>
+<!-- /Page Header -->
+
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="section-row">
+                    <h3>تسجيل الدخول</h3>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <span>اسم المستخدم</span>
+                                    <input class="input" type="text" name="username">
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <span>كلمة المرور</span>
+                                    <input class="input" type="password" name="password">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="primary-button btn btn-block">تسجيل الدخول</button>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <div class="panel-body">
+                                    <small>ليس لديك حساب؟ <a href="{% url 'register' %}">يمكنك الإشتراك من هنا</a></small>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->
 
 {% endblock %}

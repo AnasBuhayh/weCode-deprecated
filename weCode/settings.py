@@ -15,9 +15,14 @@ import os
 
 # This code checks if you have the SECRET.py file to connect to the live server.
 # For more info email anas.buhayh@gmail.com
-if Path("weCode/SECRET.py").is_file():
-    print("Live Database")
-    from .SECRET import *
+
+# Change to True to connect with the live database
+DB_LIVE = False
+
+if(DB_LIVE):
+    if Path("weCode/SECRET.py").is_file():
+        print("Live Database")
+        from .SECRET import *
 else:
     print("Local Database")
     NAME = 'blog_db'
