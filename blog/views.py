@@ -24,12 +24,24 @@ class HomeView(ListView):
         popular = posts.order_by('-views')[:6]
         recent = posts[:4]
 
+        class category:
+            def __init__(self, name, count):
+                self.name = name
+                self.count = count
+
+            
+        articles = category('مقالات',10)
+        news = category('أخبار',20)
+        tutorials = category('دروس',30)
+
+        
         context = super().get_context_data(**kwargs)
         context = {
             'recent' : recent,
             'featured': featured,
             'popular': popular,
             'featured_categories': featured_categories,
+            'categories': [articles, news, tutorials],
         }
 
         return context

@@ -6,6 +6,7 @@ from .forms import SignUpForm, EditProfileForm, PasswordChangeingForm
 from django.contrib.auth.views import PasswordChangeView
 from django.views.generic import DetailView, CreateView
 from .models import Profile
+from blog.models import Post
 from .forms import ProfilePageForm
 
 class CreateProfilePageView(CreateView):
@@ -26,8 +27,13 @@ class ShowProfilePageView(DetailView):
         users = Profile.objects.all()
         context = super(ShowProfilePageView, self).get_context_data(*args, **kwargs)
         page_user = get_object_or_404(Profile, id=self.kwargs['pk'])
-        context["page_user"] = page_user      
-        return context
+        user_posts = Post.objects.filter(author__profile__id=self.kwargs['pk']).order_by('-post_date')
+        context = {
+            'page_user' : page_user,
+            'user_posts' : user_posts
+        }    
+
+        return context   
 
 class EditProfilePageView(generic.UpdateView):
     model = Profile

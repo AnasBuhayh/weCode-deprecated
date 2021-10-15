@@ -1,21 +1,48 @@
 {% extends 'base.html' %}
 {% block title %} weCode - Edit Post {{ post.title_tag }} {% endblock %}
 {% block content %}
+{% load static %}
 
 {% if user.id == post.author.id  %}
 
-<h1>تعديل مقال</h1>
-<br>
-
-<div class="form-group">
-<form method="POST">
-    {% csrf_token %}
-    {{ form.media}}
-    {{ form.as_p}}
-    <br>
-    <button class="btn btn-secondary">حفظ</button>
-</form>
+<!-- Page Header -->
+<div class="page-header">
+    <div class="container">
+        <div class="row" style="text-align: end;">
+            <div class="col-md-12">
+                <ul class="page-header-breadcrumb">
+                    <li><a href="/">الرئيسية</a></li>
+                    <li>تعديل مقال</li>
+                </ul>
+                <h1>تعديل مقال</h1>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- /Page Header -->
+
+<div class="container" dir="rtl">
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.media}}
+            {{ form.as_p}}
+            <br>
+            <button class="btn btn-secondary">حفظ</button>
+        </form>
+    </div>
+</div>
+
+<!-- Input tags Javascript -->
+<script src="{% static 'weCodeBlog/js/tagsinput.js' %}"></script>
+<script>
+$('tags').tagsinput({
+    maxTags: 5,
+    maxChars: 8,
+    allowDuplicates: false,
+    
+});
+</script>
 
 {% else %}
 

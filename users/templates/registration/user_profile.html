@@ -9,7 +9,7 @@
         <div class="row" style="text-align: end;">
             <div class="col-md-12">
                 <ul class="page-header-breadcrumb">
-                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="/">الرئيسية</a></li>
                     <li>البيانات الشخصية</li>
                 </ul>
                 <h1>{{ page_user.user.first_name }} {{ page_user.user.last_name }}</h1>
@@ -19,40 +19,83 @@
 </div>
 <!-- /Page Header -->
 
-<br><br>
-<div class="container" dir="rtl">
-    <div class="card mb-3">
-        <div class="row g-0">
-            <div class="col-md-2">
-            {% if page_user.profile_pic %}
-            <img src="{{ page_user.profile_pic.url  }}" class="img-fluid rounded-start" alt="profile picture">
-            {% else %}
-            <img src="{% static 'blog\images\default-picture.png' %}" class="img-fluid rounded-start" alt="profile picture">
-            {% endif %}
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-4">
+                <!-- author -->
+                <div class="section-row">
+                    <div class="post-author">
+                        <div class="media">
+                            <div class="media-left">
+                                {% if page_user.profile_pic %}
+                                <img class="media-object" src="{{ page_user.profile_pic.url }}" alt="">
+                                {% else %}
+                                <img class="media-object" src="{% static 'blog\images\default-picture.png' %}" alt="">
+                                {% endif %}
+                            </div>
+                            <div class="media-body">
+                                <div class="media-heading">
+                                    <h4>{{ page_user.user.first_name }} {{ page_user.user.last_name }}</h4>
+                                </div>
+                                <p>{{ page_user.bio }}</p>
+                                <ul class="author-social">
+                                    {% if page_user.website_url %}
+                                    <li><a href="{{ page_user.website_url }}"><i class="fa fa-id-card-o"></i></a></li>
+                                    {% endif %}
+                                    {% if page_user.facebook_url %}
+                                    <li><a href="{{ page_user.facebook_url }}"><i class="fa fa-facebook"></i></a></li>
+                                    {% endif %}
+                                    {% if page_user.twitter_url %}
+                                    <li><a href="{{ page_user.twitter_url }}"><i class="fa fa-twitter"></i></a></li>
+                                    {% endif %}
+                                    {% if page_user.github_url %}
+                                    <li><a href="{{ page_user.github_url }}"><i class="fa fa-github"></i></a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /author -->
             </div>
-            <div class="col-md-10">
-            <div class="card-body">
-                <h5 class="card-title"><a href="{% url 'show-profile-page' page_user.id %}">{{ page_user.user.first_name }} {{ page_user.user.last_name }}</a></h5>
-                <p class="card-text"><small class="text-muted">
-                    {% if page_user.website_url %}
-                        <a href="{{ page_user.website_url }}">Website</a> | 
-                    {% endif %}
-                    {% if page_user.facebook_url %}
-                        <a href="{{ page_user.facebook_url }}">Facebook</a> |
-                    {% endif %}
-                    {% if page_user.twitter_url %}
-                        <a href="{{ page_user.twitter_url }}">Twitter</a> | 
-                    {% endif %}
-                    {% if page_user.github_url %}
-                        <a href="{{ page_user.github_url }}">GitHub</a>
-                    {% endif %}
-                </small></p>
-                <p class="card-text">{{ page_user.bio }}</p>
-            </div>
+            <div class="col-md-8">						
+                <div class="aside-widget">
+                    <div class="section-title">
+                        <h2>المقالات</h2>
+                    </div>
+                    
+                    <!-- post widget -->
+                    {% for post in user_posts %}
+                    <div class="post post-widget">
+                        <a class="post-img" href="blog-post.html"><img src="./img/widget-1.jpg" alt=""></a>
+                        <div class="post-body">
+                            <div class="post-meta">
+                                <a class="post-category cat-2" href="{% url 'category' post.category.slug %}">{{ post.category }}</a>
+                                <span class="post-date">{{ post.post_date|date:"Y-m-d"}}</span>
+                            </div>
+                            <h3 class="post-title"><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h3>
+                            <p>{{ post.summary }}</p>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- /post widget -->						
+
+
+                </div>
+
             </div>
         </div>
+        <!-- /row -->
     </div>
+    <!-- /container -->
 </div>
+<!-- /section -->
 
 
 {% endblock %}

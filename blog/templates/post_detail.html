@@ -150,7 +150,7 @@
                                 </div>
                                 <div class="media-body">
                                     <div class="media-heading">
-                                        <h3><a href="{{ post.author.first_name }} {{ post.author.last_name }}">{{ post.author.first_name }} {{ post.author.last_name }}</a></h3>
+                                        <h3><a href="{% url 'show-profile-page' post.author.profile.id %}">{{ post.author.first_name }} {{ post.author.last_name }}</a></h3>
                                     </div>
                                     <p>{{ post.author.profile.bio }}</p>
                                     <ul class="author-social">

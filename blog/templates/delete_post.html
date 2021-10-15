@@ -4,21 +4,37 @@
 
 {% if user.id == post.author.id  %}
 
-<h1>حذف مقالة</h1>
-<br>
-
-<h3>حذف: {{ post.title }}</h3>
-
-<div class="form-group">
-<form method="POST">
-    {% csrf_token %}
-    <br>
-    <strong>هل أنت متأكد من الرغبة في إزالة المقالة؟</strong>
-    <br>
-    <br>
-    <button class="btn btn-danger">حذف المقالة</button>
-</form>
+<!-- Page Header -->
+<div class="page-header">
+    <div class="container">
+        <div class="row" style="text-align: end;">
+            <div class="col-md-12">
+                <ul class="page-header-breadcrumb">
+                    <li><a href="/">الرئيسية</a></li>
+                    <li>حذف مقال</li>
+                </ul>
+                <h1>حذف مقال</h1>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- /Page Header -->
+
+<div class="container">
+    <h3>حذف: {{ post.title }}</h3>
+
+    <div class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        <br>
+        <strong>هل أنت متأكد من الرغبة في إزالة المقالة؟</strong>
+        <br>
+        <br>
+        <button class="btn btn-danger">حذف المقالة</button>
+    </form>
+    </div>
+</div>
+
 
 {% else %}
 

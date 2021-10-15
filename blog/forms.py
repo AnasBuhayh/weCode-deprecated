@@ -47,7 +47,7 @@ class UpdatePostForm(forms.ModelForm):
 
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-control'}),
-            'tags': forms.TextInput(attrs={'class':'form-control'}),
+            'tags': forms.TextInput(attrs={'class':'form-control', 'data-role':"tagsinput", 'name':"tags"}),
             'category': forms.Select(choices=choices_list, attrs={'class':'form-control'}),
             'header_image': forms.FileInput(attrs={'class':'form-control'}),
             'body': forms.Textarea(attrs={'class':'form-control'}),
