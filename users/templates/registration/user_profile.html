@@ -6,7 +6,7 @@
 <!-- Page Header -->
 <div class="page-header">
     <div class="container">
-        <div class="row" style="text-align: end;">
+        <div class="row page-header-align">
             <div class="col-md-12">
                 <ul class="page-header-breadcrumb">
                     <li><a href="/">الرئيسية</a></li>
@@ -35,7 +35,7 @@
                                 {% if page_user.profile_pic %}
                                 <img class="media-object" src="{{ page_user.profile_pic.url }}" alt="">
                                 {% else %}
-                                <img class="media-object" src="{% static 'blog\images\default-picture.png' %}" alt="">
+                                <img class="media-object" src="{% static 'weCodeBlog/images/default-picture.png' %}" alt="">
                                 {% endif %}
                             </div>
                             <div class="media-body">

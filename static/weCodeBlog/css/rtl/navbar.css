@@ -38,9 +38,10 @@
     padding: 0;
 }
 
-.nav-aside-menu, .section-row,.post ,.post-thumb,ul{
+.nav-aside-menu, .section-row,.post ,.post-thumb, .category-widget{
     text-align: end !important;
 }
+
 .post-body{
     right: 0px;
 }

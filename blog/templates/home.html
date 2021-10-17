@@ -11,7 +11,7 @@
             <!-- post -->
             {% for post in featured %}
             <div class="col-md-6">
-                <div class="post post-thumb">
+                <div class="post post-thumb post-main">
                     <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
                     <div class="post-body">
                         <div class="post-meta">
@@ -39,7 +39,9 @@
             {% for post in popular %}
             <div class="col-md-4">
                 <div class="post">
-                    <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
+                    <div class="post-img-container">
+                        <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
+                    </div>
                     <div class="post-body">
                         <div class="post-meta">
                             <a class="post-category cat-1" href="{% url 'category' post.category.slug %}">{{ post.category }}</a>
@@ -75,7 +77,9 @@
             {% for post in featured_categories %}
             <div class="col-md-4">
                 <div class="post">
-                    <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
+                    <div class="post-img-container">
+                        <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
+                    </div>
                     <div class="post-body">
                         <div class="post-meta">
                             <a class="post-category cat-2" href="{% url 'category' post.category.slug %}">{{ post.category }}</a>
@@ -105,7 +109,7 @@
                 <!-- ad -->
                 <div class="aside-widget text-center">
                     <a href="#" style="display: inline-block;margin: auto;">
-                        <img class="img-responsive" src="./img/ad-1.jpg" alt="">
+                        <img class="img-responsive" src="{% static 'images\ad-1.jpg' %}" alt="">
                     </a>
                 </div>
                 <!-- /ad -->
@@ -209,12 +213,12 @@
                 $.each(json_data, function(index, data){
                     _html+='<div class="col-md-12">\
                         <div class="post post-row">\
-                            <a class="post-img" href="'+'\posts\\'+data.fields.slug+'"><img src="'+'\media\\'+data.fields.header_image+'" alt=""></a>\
+                            <a class="post-img" href="'+'/posts/'+data.fields.slug+'"><img src="'+'/media/'+data.fields.header_image+'" alt=""></a>\
                             <div class="post-body">\
                                 <div class="post-meta">\
                                     <span class="post-date">'+data.fields.post_date+'</span>\
                                 </div>\
-                                <h3 class="post-title"><a href="'+'\posts\\'+data.fields.slug+'">'+data.fields.title+'</a></h3>\
+                                <h3 class="post-title"><a href="'+'/posts/'+data.fields.slug+'">'+data.fields.title+'</a></h3>\
                                 <p>'+data.fields.summary+'</p>\
                             </div>\
                         </div>\
@@ -225,7 +229,7 @@
                 if(_countTotal==res.totalResult){
                     $('#load-more-button').remove();
                 }else{
-                    $('#load-more-button').removeClass('disabled').text('Load more');
+                    $('#load-more-button').removeClass('disabled').text('المزيد');
                 }
             }
         })

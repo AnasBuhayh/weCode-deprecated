@@ -12,7 +12,7 @@ from .forms import ProfilePageForm
 class CreateProfilePageView(CreateView):
     model = Profile
     form_class = ProfilePageForm
-    template_name = 'registration/create_profile_page.html'
+    template_name = 'registration/create_profile.html'
 
     # gets the user id
     def form_valid(self, form):
@@ -37,7 +37,7 @@ class ShowProfilePageView(DetailView):
 
 class EditProfilePageView(generic.UpdateView):
     model = Profile
-    template_name = 'registration/edit_profile_page.html'
+    template_name = 'registration/edit_profile.html'
     form_class = ProfilePageForm
     #fields = ['bio', 'profile_pic', 'website_url', 'twitter_url', 'facebook_url', 'github_url']
     success_url = reverse_lazy('home')
@@ -53,7 +53,7 @@ class UserRegisterView(generic.CreateView):
 
 class UserEditView(generic.UpdateView):
     form_class = EditProfileForm
-    template_name = 'registration/edit_profile.html'
+    template_name = 'registration/edit_settings.html'
     success_url = reverse_lazy('home')
 
     def get_object(self):

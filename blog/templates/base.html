@@ -29,6 +29,7 @@
         <!-- CSS CUSTOM -->
         <link rel="stylesheet" type="text/css" href="{% static 'weCodeBlog/css/style.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'weCodeBlog/css/tagsinput.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'weCodeBlog/css/custom-style.css' %}">
 
 		<!-- JQuery -->
 		<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
@@ -83,17 +84,37 @@
 					<div class="section-row">
 						<ul class="nav-aside-menu">
                             {% if user.is_authenticated %}
-                                <li><a href="#">{{ user.username }} مرحبا</a></li>
+                                <li>
+									<div class="post-author">
+										<div class="media">
+											<div class="media-left">
+												{% if user.profile.profile_pic %}
+												<img class="media-object" src="{{ user.profile.profile_pic.url }}" alt="">
+												{% else %}
+												<img class="media-object" src="{% static 'weCodeBlog/images/default-picture.png' %}" alt="">
+												{% endif %}
+											</div>
+										</div>
+									</div>
+									{% if user.profile.id %}
+									<a href="{% url 'show-profile' user.profile.id %}">مرحبا, {{ user.first_name }} </a>
+									{% else %}
+									مرحبا, {{ user.first_name }}
+									<br>
+									<br>
+									أرجوا منك إنشاء بيانات الحساب من <a href="{% url 'create-profile' %}">هنا</a> 
+									ليمكنك إضافة مقالات و الدخول لصفحتك الشخصية
+									{% endif %}
+								</li>
 								<hr>
+								{% if user.profile.id %}
                                 <li><a href="{% url 'add-post' %}">إضافة مقالة</a></li>
                                 <hr>
-                                {% if user.profile.id %}
-                                    <li><a href="{% url 'show-profile-page' user.profile.id %}">حساب المستخدم</a></li>
-                                    <li><a href="{% url 'edit-profile-page' user.profile.id %}">تعديل البيانات</a></li>
-                                    {% else %}
-                                    <li><a href="{% url 'edit-profile' %}">تعديل الإعدادات</a></li>
-                                    <li><a href="{% url 'create-profile-page' %}">البيانات الشخصية</a></li>
+								<li><a href="{% url 'edit-profile' user.profile.id %}">تعديل البيانات</a></li>
+								{% else %}
+								<li><a href="{% url 'create-profile' %}">إنشاء البيانات الشخصية</a></li>
                                 {% endif %}
+								<li><a href="{% url 'edit-settings' %}">تعديل الإعدادات</a></li>
 								<hr>
                                 <li><a href="{% url 'logout' %}">الخروج</a></li>
 							{% else %}

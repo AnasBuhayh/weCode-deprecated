@@ -396,7 +396,7 @@ RESPONSIVE
  .nav-aside-menu li a {
      font-family: 'Tajawal', 'Nunito Sans', sans-serif;
      font-weight:700;
-     font-size:23px;
+     font-size:18px;
 }
  .nav-aside-social li {
      display: inline-block;
@@ -480,6 +480,7 @@ RESPONSIVE
 }
  .page-header .page-header-breadcrumb {
      margin: 15px 0px;
+     direction: rtl;
 }
  .page-header .page-header-breadcrumb li {
      display: inline-block;
@@ -530,9 +531,9 @@ RESPONSIVE
      font-size: 13px;
      text-transform: uppercase;
      padding: 3px 10px;
+     margin-left: 15px;
      font-weight: 600;
      border-radius: 2px;
-     margin-right: 15px;
      color: #FFF;
      background-color: #212631;
      -webkit-transition: 0.2s opacity;

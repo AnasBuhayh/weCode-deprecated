@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
-{% block title %} weCode - Edit Post {{ post.title_tag }} {% endblock %}
+{% block title %} Edit Profile {% endblock %}
 {% block content %}
-{% load static %}
-
-{% if user.id == post.author.id  %}
 
 <!-- Page Header -->
 <div class="page-header">
@@ -11,10 +8,10 @@
         <div class="row page-header-align">
             <div class="col-md-12">
                 <ul class="page-header-breadcrumb">
-                    <li><a href="/">الرئيسية</a></li>
-                    <li>تعديل مقال</li>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li>تعديل الإعدادات</li>
                 </ul>
-                <h1>تعديل مقال</h1>
+                <h1>تعديل الإعدادات</h1>
             </div>
         </div>
     </div>
@@ -22,35 +19,18 @@
 <!-- /Page Header -->
 
 <div class="container" dir="rtl">
+    <!-- section -->
     <div class="section">
         <div class="form-group">
             <form method="POST">
                 {% csrf_token %}
-                {{ form.media}}
                 {{ form.as_p}}
                 <br>
                 <button class="btn btn-secondary">حفظ</button>
             </form>
         </div>
     </div>
+    {{ user.profile.bio }}
 </div>
-    
-
-<!-- Input tags Javascript -->
-<script src="{% static 'weCodeBlog/js/tagsinput.js' %}"></script>
-<script>
-$('tags').tagsinput({
-    maxTags: 5,
-    maxChars: 8,
-    allowDuplicates: false,
-    
-});
-</script>
-
-{% else %}
-
-<p>صحفة خاطئة يرجى العودة <a href="{% url 'home' %}">للرئيسية</a></p>
-
-{% endif %}
 
 {% endblock %}

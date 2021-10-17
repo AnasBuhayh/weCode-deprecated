@@ -8,6 +8,15 @@ class ProfilePageForm(forms.ModelForm):
         model = Profile
         fields = ('bio', 'profile_pic', 'website_url', 'twitter_url', 'facebook_url', 'github_url')
 
+        labels = {
+        "bio": "السيرة الذاتية",
+        "profile_pic": "الصورة الشخصية",
+        "website_url": "الموقع الشخصي",
+        "twitter_url": "Twitter",
+        "facebook_url": "Facebook",
+        "github_url": "GitHub",
+        }
+
         widgets = {
             'bio': forms.Textarea(attrs={'class':'form-control'}),
             #make sure it's an image
@@ -18,14 +27,8 @@ class ProfilePageForm(forms.ModelForm):
             'github_url': forms.TextInput(attrs={'class':'form-control'}),
         }
 
-        labels = {
-        "bio": "السيرة الذاتية",
-        "profile_pic": "الصورة الشخصية",
-        "website_url": "الموقع الشخصي",
-        "twitter_url": "Twitter",
-        "facebook_url": "Facebook",
-        "github_url": "GitHub",
-        }
+        
+
 
 class SignUpForm(UserCreationForm):
     class Meta:
@@ -37,10 +40,13 @@ class SignUpForm(UserCreationForm):
             "last_name": "اللقب",
             "email": "البريد الإلكتروني",
             }
+        
 
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
-    first_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
-    last_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class':'form-control','size': '20'}),
+            'last_name': forms.TextInput(attrs={'class':'form-control','size': '20'}),
+            'email': forms.EmailInput(attrs={'class':'form-control','size': '40'}),
+        }
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
@@ -53,15 +59,22 @@ class SignUpForm(UserCreationForm):
         self.fields['password1'].label = "كلمة المرور"
         self.fields['password2'].label = "تأكيد كلمة المرور"
 
+
 class EditProfileForm(UserChangeForm):
     class Meta:
         model = User
         fields = ('first_name','last_name','email','password')
 
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control', 'title':'new title'}))
+    labels = {
+        "first_name": "الإسم الأول",
+        "last_name": "اللقب",
+        "email": "البريد الإلكتروني",
+        "password": "كلمة المرور",
+        }
+
     first_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
     last_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
-
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
 
 class PasswordChangeingForm(PasswordChangeForm):
     class Meta:

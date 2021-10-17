@@ -7,7 +7,7 @@
 <!-- Page Header -->
 <div class="page-header">
     <div class="container">
-        <div class="row" style="text-align: end;">
+        <div class="row page-header-align">
             <div class="col-md-12">
                 <ul class="page-header-breadcrumb">
                     <li><a href="index.html">الرئيسية</a></li>
@@ -20,17 +20,18 @@
 </div>
 <!-- /Page Header -->
 
-<br><br>
 <div class="container" dir="rtl">
-    <div class="form-group">
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p}}
-        <br>
-        <button class="btn btn-secondary">حفظ البيانات</button>
-    </form>
+    <div class="section"></div>
+        <div class="form-group">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <br>
+            <button class="btn btn-secondary">حفظ البيانات</button>
+        </form>
     </div>
 </div>
+
 
 
 

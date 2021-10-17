@@ -7,7 +7,7 @@
 <!-- Page Header -->
 <div class="page-header">
     <div class="container">
-        <div class="row" style="text-align: end;">
+        <div class="row page-header-align">
             <div class="col-md-12">
                 <ul class="page-header-breadcrumb">
                     <li><a href="/">الرئيسية</a></li>
@@ -23,18 +23,18 @@
 <div class="container"  dir="rtl">
 {% if user.is_authenticated %}
 
-    <h1>إضافة مقالة</h1>
-    <br>
-
+<div class="section">
     <div class="form-group">
-    {{ form.media}}
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p}}
-        <br>
-        <button class="btn btn-secondary">إضافة</button>
-    </form>
+        {{ form.media}}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <br>
+            <button class="btn btn-secondary">إضافة</button>
+        </form>
     </div>
+</div>
+
 
     <!-- Input tags Javascript -->
     <script src="{% static 'weCodeBlog/js/tagsinput.js' %}"></script>
