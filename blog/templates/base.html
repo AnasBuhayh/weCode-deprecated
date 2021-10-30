@@ -68,10 +68,11 @@
 						<div class="nav-btns">
 							<button class="aside-btn"><i class="fa fa-bars"></i></button>
 							<button class="search-btn"><i class="fa fa-search"></i></button>
-							<div class="search-form">
-								<input class="search-input" type="text" name="search" placeholder="Enter Your Search ...">
+							<form class="search-form" method=POST action="{% url 'search-posts' %}">
+								{% csrf_token %}
+								<input class="search-input" type="text" name="search" placeholder="أدخل كلمات البحث">
 								<button class="search-close"><i class="fa fa-times"></i></button>
-							</div>
+							</form>
 						</div>
 						<!-- /search & aside toggle -->
 					</div>

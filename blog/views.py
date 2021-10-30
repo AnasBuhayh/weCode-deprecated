@@ -126,3 +126,17 @@ def LoadMore(request):
         'posts':posts__json,
         'totalResult':totalData
     })
+
+def SearchPosts(request):
+    if request.method == "POST":
+        searched = request.POST['search']
+        posts = Post.objects.filter(title__contains=searched)
+
+        return render(request, 
+            'search_posts.html',
+            {'searched':searched,
+            'posts':posts})
+    else:
+        return render(request, 
+        'search_posts.html',
+        {})
