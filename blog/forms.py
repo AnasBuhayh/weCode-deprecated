@@ -10,11 +10,10 @@ for item in choices:
 class AddPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title','summary', 'body', 'header_image', 'category', 'tags')
+        fields = ('title','summary', 'body', 'header_image', 'category')
 
         labels = {
         "title": "العنوان",
-        "tags": "العلامات",
         "category": "التصنيف",
         "summary":"الملخص",
         "body": "المحتوى",
@@ -23,7 +22,6 @@ class AddPostForm(forms.ModelForm):
 
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-control'}),
-            'tags': forms.TextInput(attrs={'class':'form-control', 'data-role':"tagsinput", 'name':"tags"}),
             'category': forms.Select(choices=choices_list, attrs={'class':'form-control'}),
             'summary': forms.TextInput(attrs={'class':'form-control'}),
             'header_image': forms.FileInput(attrs={'class':'form-control'}),
@@ -34,11 +32,10 @@ class AddPostForm(forms.ModelForm):
 class UpdatePostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'summary', 'body', 'category', 'tags')
+        fields = ('title', 'summary', 'body', 'category')
 
         labels = {
         "title": "العنوان",
-        "tags": "العلامات",
         "category": "التصنيف",
         "summary":"الملخص",
         "body": "المحتوى",
@@ -47,7 +44,6 @@ class UpdatePostForm(forms.ModelForm):
 
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-control'}),
-            'tags': forms.TextInput(attrs={'class':'form-control', 'data-role':"tagsinput", 'name':"tags"}),
             'category': forms.Select(choices=choices_list, attrs={'class':'form-control'}),
             'header_image': forms.FileInput(attrs={'class':'form-control'}),
             'body': forms.Textarea(attrs={'class':'form-control'}),
@@ -59,7 +55,7 @@ class AddCommentForm(forms.ModelForm):
         fields = ('body',)
 
         labels = {
-        "body": "المحتوى",
+        "body": "",
         }
 
         widgets = {

@@ -8,7 +8,6 @@ from rest_framework.decorators import api_view
 from rest_framework.pagination import PageNumberPagination
 from .serializers import PostSerializer
 from hitcount.views import HitCountDetailView
-from taggit.models import Tag
 from django.http import JsonResponse
 from django.core import serializers
 
