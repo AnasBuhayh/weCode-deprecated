@@ -21,7 +21,7 @@ env = environ.Env(
     DB_HOST='localhost',
     DB_PORT='5432'
 )
-eviron.Env.read_env()
+environ.Env.read_env()
 
 # This code checks if you have the SECRET.py file to connect to the live server.
 # For more info email anas.buhayh@gmail.com
