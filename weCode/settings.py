@@ -15,11 +15,11 @@ import os
 import environ
 
 env = environ.Env(
-    DB_NAME='blog_db',
-    DB_USER='postgres',
-    DB_PASSWORD='admin',
-    DB_HOST='localhost',
-    DB_PORT='5432'
+    DB_NAME=(str, 'blog_db'),
+    DB_USER=(str, 'postgres'),
+    DB_PASSWORD=(str, 'admin'),
+    DB_HOST=(str, 'localhost'),
+    DB_PORT=(int, 5432)
 )
 environ.Env.read_env()
 
