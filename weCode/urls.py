@@ -15,5 +15,6 @@ urlpatterns = [
 import sys
 
 TESTING = sys.argv[1:2] == ['test']
-if not TESTING:
+MIGRATION = sys.argv[1:2] == ['makemigrations'] or sys.argv[1:2] == ['migrate']
+if not TESTING and not MIGRATION:
     urlpatterns[1:1] = path('', include('blog.urls'))
