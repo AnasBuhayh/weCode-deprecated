@@ -121,7 +121,7 @@
                     <div class="col-md-12">
                         <div class="section-row">
                             <a href="#">
-                                <img class="img-responsive center-block" src="{% static 'weCodeBlog/images/ad-2.jpg' %}" alt="">
+                                <img class="img-responsive center-block" src="{% static 'weCodeBlog/images/ad-2.jpg' %}" alt="ad-2">
                             </a>
                         </div>
                     </div>
@@ -130,35 +130,41 @@
             </div>  
             <!-- /Featured -->
             
-            <div class="col-md-8">
-                <div class="row">
-                    <!-- post -->
-                    <div id="recent-posts">
-                        {% for post in recent %}
-                        <div class="col-md-12">
-                            <div class="post post-row">
-                                <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
-                                <div class="post-body">
-                                    <div class="post-meta">
-                                        <!-- <a class="post-category cat-2" href="{% url 'category' post.category.slug %}">{{ post.category }}</a> -->
-                                        <span class="post-date">{{ post.post_date|date:"Y-m-d" }}</span>
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <img class="img-responsive center-block" src="{% static 'weCodeBlog/images/ad-1.jpg' %}" alt="ad-1">
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <!-- post -->
+                        <div id="recent-posts">
+                            {% for post in recent %}
+                            <div class="col-md-12">
+                                <div class="post post-row">
+                                    <a class="post-img" href="{% url 'post-detail' post.slug %}"><img src="{{ post.header_image.url }}" alt=""></a>
+                                    <div class="post-body">
+                                        <div class="post-meta">
+                                            <!-- <a class="post-category cat-2" href="{% url 'category' post.category.slug %}">{{ post.category }}</a> -->
+                                            <span class="post-date">{{ post.post_date|date:"Y-m-d" }}</span>
+                                        </div>
+                                        <h3 class="post-title"><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h3>
+                                        <p>{{ post.summary }}</p>
                                     </div>
-                                    <h3 class="post-title"><a href="{% url 'post-detail' post.slug %}">{{ post.title }}</a></h3>
-                                    <p>{{ post.summary }}</p>
                                 </div>
                             </div>
+                            {% endfor %}
                         </div>
-                        {% endfor %}
-                    </div>
-                    <!-- /post -->
-                    
-                    <div class="col-md-12">
-                        <div class="section-row">
-                            <button class="primary-button center-block" id="load-more-button">المزيد</button>
+                        <!-- /post -->
+                        
+                        <div class="col-md-12">
+                            <div class="section-row">
+                                <button class="primary-button center-block" id="load-more-button">المزيد</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
             
         </div>
         <!-- /row -->
