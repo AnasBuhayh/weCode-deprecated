@@ -3,7 +3,7 @@ from django.views import generic
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.urls import reverse_lazy, reverse
 from .forms import SignUpForm, EditProfileForm, PasswordChangeingForm
-from django.contrib.auth.views import PasswordChangeView, PasswordResetView
+from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetView, PasswordResetDoneView, PasswordResetCompleteView, PasswordResetConfirmView
 from django.views.generic import DetailView, CreateView
 from .models import Profile
 from blog.models import Post
@@ -51,6 +51,18 @@ class UserRegisterView(generic.CreateView):
     template_name = 'registration/register.html'
     success_url = reverse_lazy('login')
 
+class PasswordResetView(PasswordResetView):
+    template_name = 'registration/password_reset.html'
+
+class PasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'registration/password_reset_sent.html'
+
+class PasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'registration/password_reset_form.html'
+
+class PasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'registration/password_reset_complete.html'
+
 class UserEditView(generic.UpdateView):
     form_class = EditProfileForm
     template_name = 'registration/edit_settings.html'
@@ -63,3 +75,4 @@ def password_success(request):
     return render(request, 'registration/password_success.html', {})
 
 
+PasswordResetDoneView
