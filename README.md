@@ -3,14 +3,8 @@ The source code of WeCode.ly blog. This website is currently being updated to in
 
 # Features tutorial
 
-![image](https://github.com/AnasBuhayh/weCode-deprecated/assets/6984894/74eebaf4-cd04-4293-a347-3ab879fb95ed)
+[![image](https://github.com/AnasBuhayh/weCode-deprecated/assets/6984894/74eebaf4-cd04-4293-a347-3ab879fb95ed)](https://drive.google.com/file/d/1ZoT_s1rKJoPZz1q8ToY1EprMhUR06Omu/view?usp=drive_link)
 
-
-[![Features tutorial]          // Title
-(https://github.com/AnasBuhayh/weCode-deprecated/assets/6984894/74eebaf4-cd04-4293-a347-3ab879fb95ed)] // Thumbnail
-(https://drive.google.com/file/d/1ZoT_s1rKJoPZz1q8ToY1EprMhUR06Omu/view?usp=drive_link "Features tutorial")    // Video Link
-
-https://drive.google.com/file/d/1ZoT_s1rKJoPZz1q8ToY1EprMhUR06Omu/view?usp=sharing
 
 # Specifications
 - Framework: Django
