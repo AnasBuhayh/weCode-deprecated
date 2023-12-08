@@ -1,5 +1,12 @@
-# weCode
-The source code of WeCode.ly blog
+# weCode - Deprecated
+The source code of WeCode.ly blog. This website is currently being updated to incoporate Django REST.
+
+# Website features and tutorial
+
+[<img src="![image](https://github.com/AnasBuhayh/weCode-deprecated/assets/6984894/e202a4dc-1977-4608-93b0-f2d95d4fdb2d)
+" width="50%">]([https://www.youtube.com/watch?v=Hc79sDi3f0U](https://drive.google.com/file/d/1ZoT_s1rKJoPZz1q8ToY1EprMhUR06Omu/view?usp=drive_link) "Now in Android: 55")
+
+https://drive.google.com/file/d/1ZoT_s1rKJoPZz1q8ToY1EprMhUR06Omu/view?usp=sharing
 
 # Specifications
 - Framework: Django
