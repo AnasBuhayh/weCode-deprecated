@@ -1,10 +1,14 @@
 # weCode - Deprecated
 The source code of WeCode.ly blog. This website is currently being updated to incoporate Django REST.
 
-# Website features and tutorial
+# Features tutorial
 
-[<img src="![image](https://github.com/AnasBuhayh/weCode-deprecated/assets/6984894/e202a4dc-1977-4608-93b0-f2d95d4fdb2d)
-" width="50%">]([https://www.youtube.com/watch?v=Hc79sDi3f0U](https://drive.google.com/file/d/1ZoT_s1rKJoPZz1q8ToY1EprMhUR06Omu/view?usp=drive_link) "Now in Android: 55")
+![image](https://github.com/AnasBuhayh/weCode-deprecated/assets/6984894/74eebaf4-cd04-4293-a347-3ab879fb95ed)
+
+
+[![Features tutorial]          // Title
+(https://github.com/AnasBuhayh/weCode-deprecated/assets/6984894/74eebaf4-cd04-4293-a347-3ab879fb95ed)] // Thumbnail
+(https://drive.google.com/file/d/1ZoT_s1rKJoPZz1q8ToY1EprMhUR06Omu/view?usp=drive_link "Features tutorial")    // Video Link
 
 https://drive.google.com/file/d/1ZoT_s1rKJoPZz1q8ToY1EprMhUR06Omu/view?usp=sharing
 
@@ -50,10 +54,6 @@ PORT = '5432'
 
 `pip install -r .\requirements.txt`
 
-- ~~Comment the line below from  weCode/urls.py (To avoid migration complicatoins)~~
-
-~~`path('', include('blog.urls')),`~~
-
 - Make migrations
 
 `python manage.py makemigrations`
@@ -61,10 +61,6 @@ PORT = '5432'
 then
 
 `python manage.py migrate`
-
-- ~~Uncomment the app link from weCode/urls.py~~
-
-~~`path('', include('blog.urls')),`~~
 
 - Create superuser
 
